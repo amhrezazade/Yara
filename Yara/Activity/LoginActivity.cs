@@ -77,6 +77,10 @@ namespace Yara.Activity
                 db.Save(data);
             }
 
+
+            StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+            Finish();
+
         }
 
 

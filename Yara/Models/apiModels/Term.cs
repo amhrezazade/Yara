@@ -14,6 +14,7 @@ namespace Yara.Models.apiModels
     public class TermItem
     {
         public int Term { set; get; }
-        public List<Lesson> Lessons { set; get; }
+        public Lesson[] Lessons { set; get; }
     }
+
 }

@@ -81,7 +81,7 @@ namespace Yara.Service
                 url = baseUrl + "/api/auth";
                 string body = JsonConvert.SerializeObject(m);
                 byte[] messageBytes = Encoding.UTF8.GetBytes(body);
-
+                
                 request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "POST";
                 request.ContentType = "application/json";
