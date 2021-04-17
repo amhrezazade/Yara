@@ -37,16 +37,16 @@ namespace Yara.Activity
         {
             await Task.Delay(2000);
 
-            var res = await Api.Test();
+            var res = await Server.Test();
 
-            if (res == TestApiResult.NetworkError)
+            if (res == Server.TestApiResult.NetworkError)
             {
                 Toast.MakeText(Application.Context, "مشکل اتصال به شبکه", ToastLength.Long).Show();
                 Finish();
                 return;
             }
 
-            if (res != TestApiResult.OK)
+            if (res != Server.TestApiResult.OK)
             {
                 StartActivity(new Intent(Application.Context, typeof(LoginActivity)));
                 return;

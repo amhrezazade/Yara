@@ -49,11 +49,17 @@ namespace Yara.Activity
                 return;
             }
 
+            lblinfo.Text = "لطفا صبر کنید";
+            btn.Visibility = ViewStates.Invisible;
+
+            await Task.Delay(100);
+
             var authResult = await Api.Login(model);
 
             if (!authResult.OK)
             {
                 lblinfo.Text = authResult.Message;
+                btn.Visibility = ViewStates.Visible;
                 return;
             }
 

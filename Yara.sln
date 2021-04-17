@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yara", "Yara\Yara.csproj", "{EB587E0D-5F04-452E-AB6C-6FA635523686}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{29B36CCC-71BC-40DB-9839-944E95AF3462}"
+	ProjectSection(SolutionItems) = preProject
+		Spalsh.pptx = Spalsh.pptx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
