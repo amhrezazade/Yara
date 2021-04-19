@@ -151,7 +151,7 @@ namespace Yara.Service
                 return new ApiResult()
                 {
                     ok = false,
-                    Res = ex.Message,
+                    Res ="خطای ارتباط با سرور",
                     code = 501
                 };
             }
