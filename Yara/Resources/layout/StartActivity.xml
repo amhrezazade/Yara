@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
+    android:background="@android:color/white"
     android:minHeight="25px"
     android:gravity="center">
     <ImageView

@@ -17,7 +17,7 @@ namespace Yara.Activity
             base.OnCreate(savedInstanceState);
             //Set layout content  
             SetContentView(Resource.Layout.activity_main);
-            db.clearData();
+
         }
     }
 }
