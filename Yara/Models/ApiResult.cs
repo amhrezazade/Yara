@@ -18,6 +18,12 @@ namespace Yara.Models
         public string Message { get; }
         public TResult data { get; }
 
+        public ApiResult(bool ok = true, string message = "ok")
+        {
+            OK = ok;
+            Message = message;
+        }
+
         public ApiResult(TResult res,bool ok = true, string message = "ok")
         {
             OK = ok;

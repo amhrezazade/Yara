@@ -8,13 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Yara.Models;
 
-namespace Yara.Data
+namespace Yara.Models.ViewModels
 {
-    public class appData
+    public class SeenInformation
     {
-        public UserData user { set; get; } = new UserData();
-
+        public int VisitID { set; get; }
+        public string VisitDate { set; get; }
+        public string VisitTime { set; get; }
     }
 }

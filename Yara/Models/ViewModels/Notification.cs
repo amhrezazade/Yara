@@ -11,9 +11,9 @@ using System.Text;
 
 namespace Yara.Models.ViewModels
 {
-    public class NotificationItel
+    public class NotificationItem
     {
-        public NotificationItel(string titel,string caption,string image)
+        public NotificationItem(string titel,string caption,string image)
         {
             this.Titel = titel;
             this.Caption = caption;

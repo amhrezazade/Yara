@@ -4,7 +4,6 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Widget;
 using System.Threading.Tasks;
-using Yara.Data;
 using Yara.Service;
 
 namespace Yara.Activity
@@ -37,20 +36,22 @@ namespace Yara.Activity
         {
             await Task.Delay(2000);
 
-            var res = await Server.Test();
+            var res = await App.RefreshData();
 
-            if (res == Server.TestApiResult.NetworkError)
-            {
-                Toast.MakeText(Application.Context, "مشکل اتصال به شبکه", ToastLength.Long).Show();
-                Finish();
-                return;
-            }
-
-            if (res != Server.TestApiResult.OK)
+            if (res == "Login")
             {
                 StartActivity(new Intent(Application.Context, typeof(LoginActivity)));
                 return;
             }
+
+
+            if (res != "OK")
+            {
+                Toast.MakeText(Application.Context, res, ToastLength.Long).Show();
+                Finish();
+                return;
+            }
+
 
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
 

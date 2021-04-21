@@ -12,7 +12,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Yara.Data;
 using Yara.Models;
 using Yara.Models.apiModels;
 
@@ -20,6 +19,14 @@ namespace Yara.Service
 {
     public static class Api
     {
+        private static async Task<ApiResult<ResType>> GetObject<ResType>(string Rout)
+        {
+            var res = await Server.Get(Rout);
+            if (res.ok)
+                return new ApiResult<ResType>(JsonConvert.DeserializeObject<ResType>(res.Res));
+            return new ApiResult<ResType>(res.ok, res.Res);
+        }
+
         public static async Task<ApiResult<string>> Login(LoginModel m)
         {
             string rout = "/api/auth";
@@ -28,15 +35,20 @@ namespace Yara.Service
             return new ApiResult<string>(res.Res,res.ok,res.Res);
         }
         
-        public static async Task<ApiResult<Student>> GetStudetData(string UserToken = null)
-        {
-            string rout = "/api/students";
-            var res = await Server.Get(rout, UserToken);
-            if (res.ok)
-                return new ApiResult<Student>(JsonConvert.DeserializeObject<Student>(res.Res));
-            return new ApiResult<Student>(null,res.ok,res.Res);
-        }
+        public static async Task<ApiResult<Student>> GetStudetData(string UserToken = null) =>
+            await GetObject<Student>("/api/students");
+        
+        public static async Task<ApiResult<TermItem[]>> GetTermList() =>
+            await GetObject<TermItem[]>("/api/lessons/student");
 
+        public static async Task<ApiResult<ActiveTermId>> GetActiveTermId() =>
+            await GetObject<ActiveTermId>("/api/lessons/activeTerm");
+
+        public static async Task<ApiResult<Announces[]>> GetAnnounces(int LessonId) =>
+            await GetObject<Announces[]>("/api/announces/actives/" + LessonId.ToString());
+
+        public static async Task<ApiResult<Practices[]>> GetPractices(int LessonId) =>
+            await GetObject<Practices[]>("/api/practices/actives/" + LessonId.ToString());
 
     }
 }

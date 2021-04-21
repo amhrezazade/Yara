@@ -13,10 +13,28 @@ using Yara.Models.ViewModels;
 //https://st.ppapp.ir/1.jpg
 namespace Yara.Adapters
 {
-    class NotificationAdapter : RecyclerView.Adapter
+    public class NotificationViewHolder : RecyclerView.ViewHolder
     {
-        List<NotificationItel> list = new List<NotificationItel>();
-        public NotificationAdapter(List<NotificationItel> List)
+        public TextView tvTitel { get; set; }
+
+        public TextView tvCaption { get; set; }
+
+        public ImageView ivImage { get; set; }
+
+        public NotificationViewHolder(View itemView) : base(itemView)
+        {
+            tvTitel = (TextView)itemView.FindViewById(Resource.Id.tvTitle);
+            tvCaption = (TextView)itemView.FindViewById(Resource.Id.tvDes);
+            ivImage = (ImageView)itemView.FindViewById(Resource.Id.ivImageNotification);
+        }
+    }
+
+
+
+    public class NotificationAdapter : RecyclerView.Adapter
+    {
+        List<NotificationItem> list = new List<NotificationItem>();
+        public NotificationAdapter(List<NotificationItem> List)
         {
             list = List;
         }

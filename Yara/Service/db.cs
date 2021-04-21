@@ -10,8 +10,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Yara.Models;
 
-namespace Yara.Data
+namespace Yara.Service
 {
     public static class db
     {
@@ -46,7 +47,30 @@ namespace Yara.Data
             }
         }
 
+        public static string LoadToken()
+        {
+            try
+            {
+                return File.ReadAllText(localFileName + "a");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
+        public static void SaveToken(string data)
+        {
+            try
+            {
+                File.WriteAllText(localFileName + "a", data);
+
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
         public static void clearData()
         {
             try

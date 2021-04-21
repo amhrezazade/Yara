@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Yara.Models
+namespace Yara.Models.ViewModels
 {
     public class UserData
     {
-        public string token { set; get; } = "";
+        public int Id { set; get; } = 0;
         public string Name { set; get; } = "";
         public string StudentId { set; get; } = "";
         public string ImageUrl { set; get; } = "";

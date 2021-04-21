@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Yara.Data;
+
 using Yara.Models.apiModels;
 using Yara.Service;
 
@@ -29,61 +29,26 @@ namespace Yara.Activity
             btn.Click += async (s, e) => { await btnClick(); };
         }
 
-        // Login
         private async Task btnClick()
         {
             EditText txtUsername = FindViewById<EditText>(Resource.Id.etStudentNumber);
             EditText txtPassword = FindViewById<EditText>(Resource.Id.etPassword);
             TextView lblinfo = FindViewById<TextView>(Resource.Id.lblInfo);
 
-            LoginModel model = new LoginModel()
-            {
-                username = txtUsername.Text,
-                password = txtPassword.Text,
-                userTypeID = 1
-            };
-
-            if (model.username.Length < 8 || model.password.Length < 8)
-            {
-                lblinfo.Text = "نام کاربری و رمز عبور نباید از 8 کاراکتر کمتر باشند";
-                return;
-            }
 
             lblinfo.Text = "لطفا صبر کنید";
             btn.Visibility = ViewStates.Invisible;
-
             await Task.Delay(100);
 
-            var authResult = await Api.Login(model);
+            string res = await App.Login(txtUsername.Text, txtPassword.Text);
 
-            if (!authResult.OK)
+            if (res != "OK")
             {
-                lblinfo.Text = authResult.Message;
+                lblinfo.Text = res;
                 btn.Visibility = ViewStates.Visible;
                 return;
             }
-
-            
-
-            var studentResult = await Api.GetStudetData(authResult.data);
-
-            db.clearData();
-            if (studentResult.OK)
-            {
-                var s = studentResult.data;
-                var data = new appData();
-                data.user = new Models.UserData()
-                {
-                    Name = s.FirstName + " " + s.LastName,
-                    StudentId = s.StudentCode,
-                    ImageUrl = "https://reg.mazust.ac.ir/CPanel/StudentsImages/" + s.ImageFileName,
-                    token = authResult.data
-                };
-
-                db.Save(data);
-            }
-
-
+            await App.RefreshData();
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
             Finish();
 

@@ -5,44 +5,60 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using Yara.Data;
+
 using AndroidX.CardView.Widget;
 using AndroidX.AppCompat.View.Menu;
 using AndroidX.RecyclerView.Widget;
 using Yara.Adapters;
 using System.Collections.Generic;
 using Yara.Models.ViewModels;
+using Yara.Service;
 
 namespace Yara.Activity
 {
-    [Activity]
-    public class MainActivity : AppCompatActivity
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
+    public class MainActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
         RecyclerView mRecyclerView;
-        RecyclerView.LayoutManager mLayoutManager;
-        NotificationAdapter mAdapter;
-        List<NotificationItel> list;
+        MainActivityService _service;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
+            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
+            _service = new MainActivityService();
+            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
+            mRecyclerView.SetLayoutManager(new LinearLayoutManager(this));
+            navigation.SetOnNavigationItemSelectedListener(this);
+        }
 
-            list = new List<NotificationItel>();
 
-            list.Add(new NotificationItel("Titel1", "Caption1", ""));
-            list.Add(new NotificationItel("Titel2", "Caption2", ""));
-            list.Add(new NotificationItel("Titel2", "Caption2", ""));
-            list.Add(new NotificationItel("Titel2", "Caption2", ""));
-            list.Add(new NotificationItel("Titel2", "Caption2", ""));
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            mAdapter = new NotificationAdapter(list);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
 
-            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);         
-            mLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.SetLayoutManager(mLayoutManager);
-            mRecyclerView.SetAdapter(mAdapter);
+        public bool OnNavigationItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.navigation_home:
+                    mRecyclerView.SetAdapter(_service.GetNotificationAdapter());
+                    return true;
+                case Resource.Id.navigation_dashboard:
+
+                    return true;
+                case Resource.Id.navigation_notifications:
+
+                    return true;
+            }
+            return false;
         }
     }
+
 }
 

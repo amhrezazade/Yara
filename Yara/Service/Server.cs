@@ -4,8 +4,8 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Yara.Data;
-
+using Yara.Models;
+using System.Net.Http;
 
 namespace Yara.Service
 {
@@ -27,13 +27,13 @@ namespace Yara.Service
             public int code;
         }
 
-        public const string baseUrl = "https://yaraapi.mazust.ac.ir";
+        public const string baseUrl = StaticData.BaseUrl;
 
         private static async Task<ApiResult> Request(HttpWebRequest req)
         {
             try
             {
-                req.UserAgent = "Yara Notifier Android Application";
+                req.UserAgent = StaticData.UserAgent;
                 var Response = await req.GetResponseAsync();
                 var response = (HttpWebResponse)Response;
                 var sr = new StreamReader(response.GetResponseStream());
@@ -88,7 +88,7 @@ namespace Yara.Service
             string token;
             if (UserToken == null)
             {
-                var data = db.Load();
+                var data = db.LoadToken();
                 if (data == null)
                     return new ApiResult()
                     {
@@ -96,7 +96,7 @@ namespace Yara.Service
                         Res = "خطای توکن",
                         code = 502
                     };
-                token = data.user.token;
+                token = data;
             }
             else
                 token = UserToken;
