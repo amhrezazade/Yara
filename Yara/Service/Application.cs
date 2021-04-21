@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,9 +97,12 @@ namespace Yara.Service
                 var Lesson = new LessonItem(l);
 
                 var AnnouncesRes = await Api.GetAnnounces(Lesson.GroupID);
-                if(AnnouncesRes.OK)
+                Lesson.Announces = new List<AnnouncesItem>();
+                Lesson.Practices = new List<PracticesItem>();
+                if (AnnouncesRes.OK)
                     foreach (var a in AnnouncesRes.data)
                         Lesson.Announces.Add(new AnnouncesItem(a));
+                        
 
                 var PracticesRes = await Api.GetPractices(Lesson.GroupID);
                 if (PracticesRes.OK)

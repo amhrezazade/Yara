@@ -27,17 +27,48 @@ namespace Yara.Service
             public int code;
         }
 
-        public const string baseUrl = StaticData.BaseUrl;
 
-        private static async Task<ApiResult> Request(HttpWebRequest req)
+
+        private static async Task<ApiResult> Request(string Rout,string body, string UserToken = null)
         {
             try
             {
-                req.UserAgent = StaticData.UserAgent;
-                var Response = await req.GetResponseAsync();
-                var response = (HttpWebResponse)Response;
-                var sr = new StreamReader(response.GetResponseStream());
-                var res = await sr.ReadToEndAsync();
+
+                WebClient client = new WebClient();
+                string token;
+                if (UserToken == null)
+                {
+                    var data = db.LoadToken();
+                    if (data == null)
+                        token = "";
+                    else
+                        token = data;
+                }
+                else
+                    token = UserToken;
+
+                client.Headers.Add("x-auth-token", token);
+
+                //client.Headers.Add("user-agent", StaticData.UserAgent);
+                client.Headers[HttpRequestHeader.UserAgent] = StaticData.UserAgent;
+
+                if (body == string.Empty)
+                {
+                    string baseSiteString = client.DownloadString(StaticData.BaseUrl + Rout);
+                    return new ApiResult()
+                    {
+                        ok = true,
+                        Res = baseSiteString,
+                        code = 200
+                    };
+                }
+
+
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                string res = client.UploadString(StaticData.BaseUrl + Rout, body);
+
+
+
                 return new ApiResult()
                 {
                     ok = true,
@@ -83,33 +114,11 @@ namespace Yara.Service
             }
         }
 
-        private static async Task<ApiResult> Request(string Rout, string UserToken = null)
-        {
-            string token;
-            if (UserToken == null)
-            {
-                var data = db.LoadToken();
-                if (data == null)
-                    return new ApiResult()
-                    {
-                        ok = false,
-                        Res = "خطای توکن",
-                        code = 502
-                    };
-                token = data;
-            }
-            else
-                token = UserToken;
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(baseUrl + Rout);
-            request.Headers.Add("x-auth-token", token);
-            return await Request(request);
-        }
 
         public static async Task<TestApiResult> Test()
         {
             string url = "/api/lessons/activeTerm";
-            var r = await Request(url);
+            var r = await Request(url,string.Empty);
             if (r.code == 502)
                 return TestApiResult.DataNull;
             if (r.code == 200)
@@ -123,9 +132,9 @@ namespace Yara.Service
 
         public static async Task<ApiResult> Get(string rout, string token = null)
         {
-            var output = await Request(rout, token);
+            var output = await Request(rout,string.Empty, token);
 
-            if (output.code == 401 || output.code == 401)
+            if (output.code == 401 || output.code == 501)
                 System.Diagnostics.Process.GetCurrentProcess().Kill();
 
             return output;
@@ -134,27 +143,12 @@ namespace Yara.Service
 
         public static async Task<ApiResult> Post(string rout, string body)
         {
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(baseUrl + rout);
-                request.Method = "POST";
-                request.ContentType = "application/json";
-                Stream stream;
-                stream = await request.GetRequestStreamAsync();
-                byte[] messageBytes = Encoding.UTF8.GetBytes(body);
-                await stream.WriteAsync(messageBytes, 0, messageBytes.Length);
-                stream.Flush();
-                return await Request(request);
-            }
-            catch(Exception ex)
-            {
-                return new ApiResult()
-                {
-                    ok = false,
-                    Res ="خطای ارتباط با سرور",
-                    code = 501
-                };
-            }
+            var output = await Request(rout, body);
+
+            if (output.code == 401 || output.code == 501)
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+
+            return output;
 
         }
 

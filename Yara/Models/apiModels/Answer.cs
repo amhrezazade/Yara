@@ -18,7 +18,7 @@ namespace Yara.Models.apiModels
         public string StudentDescription { set; get; } = string.Empty;
         public string RegDate { set; get; } = string.Empty;
         public string RegTime { set; get; } = string.Empty;
-        public int Score { set; get; } = 0;
+        public double Score { set; get; } = 0;
         public string ScoreRegisterarDescription { set; get; } = string.Empty;
         public string ScoreRegDate { set; get; } = string.Empty;
         public string ScoreRegTime { set; get; } = string.Empty;

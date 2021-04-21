@@ -47,7 +47,7 @@ namespace Yara.Activity
 
             if (res != "OK")
             {
-                Toast.MakeText(Application.Context, res, ToastLength.Long).Show();
+                //Toast.MakeText(Application.Context, res, ToastLength.Long).Show();
                 Finish();
                 return;
             }

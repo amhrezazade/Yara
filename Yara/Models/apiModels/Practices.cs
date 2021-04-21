@@ -22,8 +22,8 @@ namespace Yara.Models.apiModels
         public string StartTime { set; get; }
         public string FinishDate { set; get; }
         public string FinishTime { set; get; }
-        public int Score { set; get; }
-        public int ScoreBase { set; get; }
+        public double Score { set; get; }
+        public double ScoreBase { set; get; }
         public bool IsFileAnswer { set; get; }
         public bool IsActive { set; get; }
         public int OrderNo { set; get; }

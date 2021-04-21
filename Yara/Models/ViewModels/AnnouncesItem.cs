@@ -15,7 +15,7 @@ namespace Yara.Models.ViewModels
 {
     public class AnnouncesItem
     {
-
+        
         public AnnouncesItem(Announces a)
         {
             AnnounceID = a.AnnounceID;
@@ -23,7 +23,11 @@ namespace Yara.Models.ViewModels
             Description = a.Description;
             FileUrl = a.FileName;
             RegDate = a.RegDate;
-            SeenInfo = JsonConvert.DeserializeObject<SeenInformation>(a.SeenInfo);
+            if (a.SeenInfo != null)
+                SeenInfo = JsonConvert.DeserializeObject<SeenInformation>(a.SeenInfo);
+            else
+                SeenInfo = new SeenInformation();
+
         }
 
         public int AnnounceID { set; get; }
