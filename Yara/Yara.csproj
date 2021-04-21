@@ -63,11 +63,14 @@
   <ItemGroup>
     <Compile Include="Activity\LoginActivity.cs" />
     <Compile Include="Activity\splash.cs" />
+    <Compile Include="Adapters\NotificationAdapter.cs" />
+    <Compile Include="Adapters\NotificationViewHolder.cs" />
     <Compile Include="Data\appData Model.cs" />
     <Compile Include="Data\db.cs" />
     <Compile Include="Activity\MainActivity.cs" />
     <Compile Include="Models\apiModels\Lesson.cs" />
     <Compile Include="Models\apiModels\Term.cs" />
+    <Compile Include="Models\ViewModels\Notification.cs" />
     <Compile Include="Service\Api.cs" />
     <Compile Include="Models\apiModels\Login.cs" />
     <Compile Include="Models\apiModels\Student.cs" />
@@ -123,6 +126,9 @@
       <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design">
+      <Version>28.0.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
       <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.Browser">
@@ -190,10 +196,9 @@
     <AndroidResource Include="Resources\drawable\border_group_id.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\item_notification.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\item_lesson.xml" />
+    <AndroidResource Include="Resources\layout\itemNotif.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
