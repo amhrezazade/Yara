@@ -50,5 +50,7 @@ namespace Yara.Service
         public static async Task<ApiResult<Practices[]>> GetPractices(int LessonId) =>
             await GetObject<Practices[]>("/api/practices/actives/" + LessonId.ToString());
 
+        public static async Task<ApiResult<LessonInfo>> GetLessonInfo(int LessonId) =>
+            await GetObject<LessonInfo>("/api/lessons/groupInfo/" + LessonId.ToString());
     }
 }

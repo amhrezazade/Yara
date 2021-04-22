@@ -18,5 +18,8 @@ namespace Yara.Models
         public UserData user { set; get; } 
         public int Activeterm { set; get; } 
         public List<LessonItem> Lessons { set; get; }
+
+
+
     }
 }

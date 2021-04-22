@@ -38,6 +38,7 @@
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <MandroidI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -67,6 +68,9 @@
     <Compile Include="Models\apiModels\ActiveTermId.cs" />
     <Compile Include="Models\apiModels\Announces.cs" />
     <Compile Include="Models\apiModels\Answer.cs" />
+    <Compile Include="Models\apiModels\EduClasse.cs" />
+    <Compile Include="Models\apiModels\LessonInfo.cs" />
+    <Compile Include="Models\apiModels\Member.cs" />
     <Compile Include="Models\apiModels\Practices.cs" />
     <Compile Include="Models\appData.cs" />
     <Compile Include="Models\StaticData.cs" />
@@ -74,6 +78,7 @@
     <Compile Include="Models\ViewModels\LessonItem.cs" />
     <Compile Include="Models\ViewModels\PracticesItem.cs" />
     <Compile Include="Models\ViewModels\SeenInformation.cs" />
+    <Compile Include="Service\Date_Time.cs" />
     <Compile Include="Service\db.cs" />
     <Compile Include="Activity\MainActivity.cs" />
     <Compile Include="Models\apiModels\Lesson.cs" />

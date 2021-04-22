@@ -14,9 +14,6 @@ namespace Yara.Models.ViewModels
 {
     public class LessonItem
     {
-        public LessonItem()
-        { }
-
         public LessonItem(Lesson l)
         {
             GroupID = l.GroupID;
@@ -35,6 +32,10 @@ namespace Yara.Models.ViewModels
         public string ExamFinishTime { set; get; }
         public string LessonCode { set; get; }
         public string LessonTitle { set; get; }
+        public string EduGroupTitle { set; get; }
+        public string LecturerName { set; get; }
+        public List<EduClasse> Classes { set; get; }
+
         public List<AnnouncesItem> Announces { set; get; }
         public List<PracticesItem> Practices { set; get; }
     }

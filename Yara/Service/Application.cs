@@ -14,13 +14,14 @@ using Yara.Models;
 using Yara.Models.apiModels;
 using Yara.Models.ViewModels;
 
+
 namespace Yara.Service
 {
     public static class App
     {
         public static async Task<string> Login(string Username,string Password)
         {
-
+            
             LoginModel model = new LoginModel()
             {
                 username = Username,
@@ -92,22 +93,32 @@ namespace Yara.Service
                 return "خطا";
 
             data.Lessons = new List<LessonItem>();
+            LessonItem Lesson;
             foreach (var l in Lessons)
             {
-                var Lesson = new LessonItem(l);
+                
+                var AnnouncesRes = await Api.GetAnnounces(l.GroupID);
+                var PracticesRes = await Api.GetPractices(l.GroupID);
+                var LessonInfoRes = await Api.GetLessonInfo(l.GroupID);
 
-                var AnnouncesRes = await Api.GetAnnounces(Lesson.GroupID);
+                Lesson = new LessonItem(l)
+                {
+                    EduGroupTitle = LessonInfoRes.data.EduGroupTitle,
+                    LecturerName =
+                        LessonInfoRes.data.LecturerFirstName + " " +
+                        LessonInfoRes.data.LecturerLastName,
+                    Classes = LessonInfoRes.data.Classes.ToList()
+                };
+
                 Lesson.Announces = new List<AnnouncesItem>();
-                Lesson.Practices = new List<PracticesItem>();
-                if (AnnouncesRes.OK)
-                    foreach (var a in AnnouncesRes.data)
-                        Lesson.Announces.Add(new AnnouncesItem(a));
-                        
+                foreach (var a in AnnouncesRes.data)
+                    Lesson.Announces.Add(new AnnouncesItem(a));
 
-                var PracticesRes = await Api.GetPractices(Lesson.GroupID);
-                if (PracticesRes.OK)
-                    foreach (var a in PracticesRes.data)
-                        Lesson.Practices.Add(new PracticesItem(a));
+                Lesson.Practices = new List<PracticesItem>();
+                foreach (var a in PracticesRes.data)
+                    Lesson.Practices.Add(new PracticesItem(a));
+
+
 
                 data.Lessons.Add(Lesson);
             }

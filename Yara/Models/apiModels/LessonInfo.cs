@@ -11,16 +11,17 @@ using System.Text;
 
 namespace Yara.Models.apiModels
 {
-    public class Lesson
+    public class LessonInfo
     {
         public int GroupID { set; get; }
+        public int Term { set; get; }
+        public string EduGroupTitle { set; get; }
         public string ExamDate { set; get; }
         public string ExamStartTime { set; get; }
         public string ExamFinishTime { set; get; }
-        public string LessonCode { set; get; }
-        public string LessonTitle { set; get; }
-        public int UnseenAnnounces { set; get; }
-        public int UnseenTickets { set; get; }
-        public int UnansweredPractices { set; get; }
+        public string LecturerFirstName { set; get; }
+        public string LecturerLastName { set; get; }
+        public EduClasse[] Classes { set; get; }
+
     }
 }
