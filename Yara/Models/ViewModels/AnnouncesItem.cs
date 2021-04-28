@@ -15,25 +15,26 @@ namespace Yara.Models.ViewModels
 {
     public class AnnouncesItem
     {
-        
+        public AnnouncesItem()
+        { }
         public AnnouncesItem(Announces a)
         {
             AnnounceID = a.AnnounceID;
-            Title = a.Title;
-            Description = a.Description;
-            FileUrl = a.FileName;
-            RegDate = a.RegDate;
+            if (a.Title == null) Title = ""; else Title = a.Title;
+            if (a.Description == null) Description = ""; else Description = a.Description;
+            if (a.FileName == null) FileName = ""; else FileName = a.FileName;
+            if (a.RegDate == null) RegDate = ""; else RegDate = a.RegDate;
+            if (a.RegTime == null) RegTime = ""; else RegTime = a.RegTime;
             if (a.SeenInfo != null)
                 SeenInfo = JsonConvert.DeserializeObject<SeenInformation>(a.SeenInfo);
             else
                 SeenInfo = new SeenInformation();
-
         }
 
         public int AnnounceID { set; get; }
         public string Title { set; get; }
         public string Description { set; get; }
-        public string FileUrl { set; get; }
+        public string FileName { set; get; }
         public string RegDate { set; get; }
         public string RegTime { set; get; }
         public SeenInformation SeenInfo { set; get; }

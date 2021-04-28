@@ -11,30 +11,29 @@ using System.Linq;
 using System.Text;
 using Yara.Activity;
 using Yara.Adapters;
+using Yara.Models;
 using Yara.Models.ViewModels;
 
 namespace Yara.Service
 {
     public class MainActivityService
     {
-
+        private appData _data;
 
 
         public MainActivityService()
         {
-
+            _data = db.Load();
         }
 
-        public NotificationAdapter GetNotificationAdapter()
-        {
-            var list = new List<NotificationItem>();
-            list.Add(new NotificationItem("Titel1", "Caption1", ""));
-            list.Add(new NotificationItem("Titel2", "Caption2", ""));
-            list.Add(new NotificationItem("Titel2", "Caption2", ""));
-            list.Add(new NotificationItem("Titel2", "Caption2", ""));
-            list.Add(new NotificationItem("Titel2", "Caption2", ""));
-            return new NotificationAdapter(list);
+
+
+        public ContentItemAdapter GetTestAdapter()
+        {      
+            List<ContentItem> ContentList = new List<ContentItem>();
+            return new ContentItemAdapter(ContentList.ToArray());
         }
+
 
     }
 }

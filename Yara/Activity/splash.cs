@@ -34,7 +34,6 @@ namespace Yara.Activity
 
         async void SimulateStartup()
         {
-            await Task.Delay(2000);
 
             var res = await App.RefreshData();
 

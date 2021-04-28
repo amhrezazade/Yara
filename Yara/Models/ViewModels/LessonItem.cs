@@ -14,14 +14,16 @@ namespace Yara.Models.ViewModels
 {
     public class LessonItem
     {
+        public LessonItem()
+        { }
         public LessonItem(Lesson l)
         {
             GroupID = l.GroupID;
-            ExamDate = l.ExamDate;
-            ExamStartTime = l.ExamStartTime;
-            ExamFinishTime = l.ExamFinishTime;
-            LessonCode = l.LessonCode;
-            LessonTitle = l.LessonTitle;
+            if (l.ExamDate == null) ExamDate = ""; else ExamDate = l.ExamDate;
+            if (l.ExamStartTime == null) ExamStartTime = ""; else ExamStartTime = l.ExamStartTime;
+            if (l.ExamFinishTime == null) ExamFinishTime = ""; else ExamFinishTime = l.ExamFinishTime;
+            if (l.LessonCode == null) LessonCode = ""; else LessonCode = l.LessonCode;
+            if (l.LessonTitle == null) LessonTitle = ""; else LessonTitle = l.LessonTitle;
             Announces = null;
             Practices = null;
         }

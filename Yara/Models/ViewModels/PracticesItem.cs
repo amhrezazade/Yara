@@ -14,20 +14,23 @@ namespace Yara.Models.ViewModels
 {
     public class PracticesItem
     {
+        public PracticesItem()
+        { }
         public PracticesItem(Practices p)
         {
             PracticeID = p.PracticeID;
-            Title = p.Title;
-            Description = p.Description;
-            FileName = p.FileName;
-            FinishDate = p.FinishDate;
-            FinishDate = p.FinishDate;
-            FinishTime = p.FinishTime;
+            if (p.Title == null) Title = ""; else Title = p.Title;
+            if (p.Description == null) Description = ""; else Description = p.Description;
+            if (p.FileName == null) FileName = ""; else FileName = p.FileName;
+            if (p.StartDate == null) StartDate = ""; else StartDate = p.StartDate;
+            if (p.StartTime == null) StartTime = ""; else StartTime = p.StartTime;
+            if (p.FinishDate == null) FinishDate = ""; else FinishDate = p.FinishDate;
+            if (p.FinishTime == null) FinishTime = ""; else FinishTime = p.FinishTime;
             Score = p.Score;
             ScoreBase = p.ScoreBase;
             IsFileAnswer = p.IsFileAnswer;
-            RegDate = p.RegDate;
-            RegTime = p.RegTime;
+            if (p.RegDate == null) RegDate = ""; else RegDate = p.RegDate;
+            if (p.RegTime == null) RegTime = ""; else RegTime = p.RegTime;
             RegedAnswer = p.RegedAnswer;
             InRegAnswerScope = p.InRegAnswerScope;
         }

@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
-    android:background="@android:color/white"
+    android:background="@android:color/black"
     android:minHeight="25px"
     android:gravity="center">
     <ImageView
         android:minWidth="25px"
         android:minHeight="25px"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:id="@+id/imageView"
         android:layout_centerInParent="true"
-        android:src="#ff843d3d" 
+        android:src="@drawable/logo" 
 
     />
 

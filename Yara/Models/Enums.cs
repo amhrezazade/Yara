@@ -9,12 +9,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Yara.Models.ViewModels
+namespace Yara.Models
 {
-    public class SeenInformation
+    public enum ImageType
     {
-        public int VisitID { set; get; } = 0;
-        public string VisitDate { set; get; } = "";
-        public string VisitTime { set; get; } = "";
+        Note,
+        Motif,
+        Profile,
+        Subject,
+        Person,
+        None
+
+
     }
 }

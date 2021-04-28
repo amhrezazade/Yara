@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Yara.Models;
 
 namespace Yara.Service
@@ -18,64 +19,105 @@ namespace Yara.Service
     {
         private static string localFileName = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "data.dat");
 
-        public static appData Load()
+        public static async Task<appData> LoadAsync()
         {
             try 
             {
-                string txt = File.ReadAllText(localFileName);
+                string txt = await File.ReadAllTextAsync(localFileName);
                 return JsonConvert.DeserializeObject<appData>(txt);
 
             }
-            catch(Exception ex)
+            catch//(Exception ex)
             {
                 return null;
             }   
         }
 
-        public static void Save(appData data)
-        {
-
-            try
-            {
-                string txt = JsonConvert.SerializeObject(data);
-                File.WriteAllText(localFileName, txt);
-
-            }
-            catch (Exception ex)
-            {
-                return;
-            }
-        }
-
-        public static string LoadToken()
+        public static appData Load()
         {
             try
             {
-                return File.ReadAllText(localFileName + "a");
+                string txt = File.ReadAllText(localFileName);
+                return JsonConvert.DeserializeObject<appData>(txt);
+
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
                 return null;
             }
         }
 
-        public static void SaveToken(string data)
+        public static async Task Save(appData data)
         {
+
             try
             {
-                File.WriteAllText(localFileName + "a", data);
-
+                string txt = JsonConvert.SerializeObject(data);
+                await File.WriteAllTextAsync(localFileName, txt);
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
                 return;
             }
         }
+
+        public static async Task<string> LoadToken()
+        {
+            try
+            {
+                return await File.ReadAllTextAsync(localFileName + "a");
+            }
+            catch //(Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static async Task SaveToken(string data)
+        {
+            try
+            {
+                await File.WriteAllTextAsync(localFileName + "a", data);
+
+            }
+            catch //(Exception ex)
+            {
+                return;
+            }
+        }
+
+        public static async Task SaveProfileImage(byte[] data)
+        {
+            try
+            {
+                await File.WriteAllBytesAsync(localFileName + ".jpg", data);
+
+            }
+            catch //(Exception ex)
+            {
+                return;
+            }
+        }
+
+        public static async Task<byte[]> LoadProfileImage()
+        {
+            try
+            {
+                return await File.ReadAllBytesAsync(localFileName + ".jpg");
+            }
+            catch //(Exception ex)
+            {
+                return null;
+            }
+        }
+
         public static void clearData()
         {
             try
             {
                 File.Delete(localFileName);
+                File.Delete(localFileName + "a");
+                File.Delete(localFileName + ".jpg");
             }
             catch
             { }

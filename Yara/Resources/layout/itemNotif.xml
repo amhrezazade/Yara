@@ -11,8 +11,10 @@
           android:id="@+id/cardViewNotifActive"
         >
 		<RelativeLayout
+            android:background="#0d0d0d"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
 			<androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivImageNotification"
@@ -30,7 +32,7 @@
                 android:text="Title"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"
+                android:textColor="#ffffff"
                 android:layout_toLeftOf="@+id/ivImageNotification"
                 android:layout_centerInParent="true"
                 android:layout_marginRight="20dp"/>
@@ -41,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="Some description"
                 android:textSize="16sp"
+                android:textColor="@android:color/white" 
                 android:layout_toLeftOf="@+id/ivImageNotification"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="30dp"

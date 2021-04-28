@@ -13,15 +13,14 @@ namespace Yara.Models.ViewModels
 {
     public class NotificationItem
     {
-        public NotificationItem(string titel,string caption,string image)
+        public NotificationItem(string titel,string caption)
         {
-            this.Titel = titel;
-            this.Caption = caption;
-            this.ImageSrc = image;
+            Titel = titel;
+            Caption = caption;
         }
 
         public string Titel { set; get; }
         public string Caption { set; get; }
-        public string ImageSrc { set; get; }
+
     }
 }

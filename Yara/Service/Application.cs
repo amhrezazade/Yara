@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Yara.Models;
 using Yara.Models.apiModels;
 using Yara.Models.ViewModels;
@@ -17,8 +18,25 @@ using Yara.Models.ViewModels;
 
 namespace Yara.Service
 {
+    public delegate void Progress(int p);
     public static class App
     {
+        //public static event Progress RefreshProgress;
+        public static string GetDateString(string date,string time)
+        {
+           return date[0].ToString() + date[1] + date[2] + date[3] + "/" +
+                date[4] + date[5] + "/" +
+                date[6] + date[7] + " , " +
+                time[0] + time[1] + ":" +
+                time[2] + time[3];
+        }
+
+        public static async Task ItemClick(string arg)
+        {
+            await Browser.OpenAsync(arg, BrowserLaunchMode.SystemPreferred);
+        }
+
+
         public static async Task<string> Login(string Username,string Password)
         {
             
@@ -37,7 +55,7 @@ namespace Yara.Service
             if (!authResult.OK)
                 return authResult.Message;
 
-            db.SaveToken(authResult.data);
+            await db.SaveToken(authResult.data);
 
             return "OK";
 
@@ -45,8 +63,8 @@ namespace Yara.Service
 
         public static async Task<string> RefreshData()
         {
-            var res = await Server.Test();
 
+            var res = await Server.Test();
             switch (res)
             {
                 case Server.TestApiResult.DataNull:
@@ -61,30 +79,24 @@ namespace Yara.Service
             }
 
             var data = new appData();
-
+            
 
             var studentResult = await Api.GetStudetData();
 
+
             if (studentResult.OK)
-            {
-                var s = studentResult.data;
-                data.user = new UserData()
-                {
-                    Name = s.FirstName + " " + s.LastName,
-                    StudentId = s.StudentCode,
-                    ImageUrl = StaticData.ProfileImageURL + s.ImageFileName,
-                };
-            }
+                data.Home.Add(new ContentItem(studentResult.data));
 
 
             var TermListRes = await Api.GetTermList();
+ 
             var ActiveTermRes = await Api.GetActiveTermId();
 
-            data.Activeterm = ActiveTermRes.data.ActiveTerm;
+            int ActiveTerm = ActiveTermRes.data.ActiveTerm;
 
             Lesson[] Lessons = null;
             foreach (var term in TermListRes.data)
-                if (term.Term == data.Activeterm)
+                if (term.Term == ActiveTerm)
                 {
                     Lessons = term.Lessons;
                     break;
@@ -92,8 +104,7 @@ namespace Yara.Service
             if(Lessons ==null)
                 return "خطا";
 
-            data.Lessons = new List<LessonItem>();
-            LessonItem Lesson;
+
             foreach (var l in Lessons)
             {
                 
@@ -101,29 +112,49 @@ namespace Yara.Service
                 var PracticesRes = await Api.GetPractices(l.GroupID);
                 var LessonInfoRes = await Api.GetLessonInfo(l.GroupID);
 
-                Lesson = new LessonItem(l)
-                {
-                    EduGroupTitle = LessonInfoRes.data.EduGroupTitle,
-                    LecturerName =
-                        LessonInfoRes.data.LecturerFirstName + " " +
-                        LessonInfoRes.data.LecturerLastName,
-                    Classes = LessonInfoRes.data.Classes.ToList()
-                };
+                var titel = new NotificationItem(l.LessonTitle, LessonInfoRes.data.LecturerLastName);
 
-                Lesson.Announces = new List<AnnouncesItem>();
+                data.Announces.Add(new ContentItem(titel));
                 foreach (var a in AnnouncesRes.data)
-                    Lesson.Announces.Add(new AnnouncesItem(a));
+                    data.Announces.Add(new ContentItem(a));
 
-                Lesson.Practices = new List<PracticesItem>();
-                foreach (var a in PracticesRes.data)
-                    Lesson.Practices.Add(new PracticesItem(a));
+                List<Practices> insope = new List<Practices>();
+                List<Practices> answered = new List<Practices>();
+                List<Practices> lost = new List<Practices>();
+                foreach (var p in PracticesRes.data)
+                    if (p.RegedAnswer == null)
+                    {
+                        if (p.InRegAnswerScope)
+                            insope.Add(p);
+                        else
+                            lost.Add(p);
+                    }
+                    else
+                        answered.Add(p);
 
+                if (insope.Count > 0)
+                {
+                    data.practicesList.InScope.Add(new ContentItem(titel));
+                    foreach (var i in insope)
+                        data.practicesList.InScope.Add(new ContentItem(i));
+                }
 
+                if (answered.Count > 0)
+                {
+                    data.practicesList.Answered.Add(new ContentItem(titel));
+                    foreach (var i in answered)
+                        data.practicesList.Answered.Add(new ContentItem(i));
+                }
 
-                data.Lessons.Add(Lesson);
+                if (lost.Count > 0)
+                {
+                    data.practicesList.Lost.Add(new ContentItem(titel));
+                    foreach (var i in lost)
+                        data.practicesList.Lost.Add(new ContentItem(i));
+                }
             }
 
-            db.Save(data);
+            await db.Save(data);
 
             return "OK";
         }

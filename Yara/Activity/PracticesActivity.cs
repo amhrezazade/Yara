@@ -5,7 +5,6 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-
 using AndroidX.CardView.Widget;
 using AndroidX.AppCompat.View.Menu;
 using AndroidX.RecyclerView.Widget;
@@ -13,23 +12,24 @@ using Yara.Adapters;
 using System.Collections.Generic;
 using Yara.Models.ViewModels;
 using Yara.Service;
+using Yara.Models;
 
 namespace Yara.Activity
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
-    public class MainActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    [Activity(Label = "تمارین")]
+    public class PracticesActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
         RecyclerView mRecyclerView;
-        MainActivityService _service;
+        practices _data;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            SetContentView(Resource.Layout.activity_main);
-            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            _service = new MainActivityService();
-            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
+            _data = db.Load().practicesList;
+            SetContentView(Resource.Layout.PracticesActivity);
+            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.PracticesnavigationBar);
+            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.PracticesrecyclerView);
             mRecyclerView.SetLayoutManager(new LinearLayoutManager(this));
             navigation.SetOnNavigationItemSelectedListener(this);
         }
@@ -46,15 +46,18 @@ namespace Yara.Activity
         {
             switch (item.ItemId)
             {
-                case Resource.Id.navigation_home:
+                case Resource.Id.navigation_p_inscope:
+                    mRecyclerView.SetAdapter(new ContentItemAdapter(_data.InScope.ToArray()));
                     return true;
-                case Resource.Id.navigation_dashboard:
+                case Resource.Id.navigation_p_Answered:
+                    mRecyclerView.SetAdapter(new ContentItemAdapter(_data.Answered.ToArray()));
                     return true;
-
+                case Resource.Id.navigation_p_Lost:
+                    mRecyclerView.SetAdapter(new ContentItemAdapter(_data.Lost.ToArray()));
+                    return true;
             }
             return false;
         }
+
     }
-
 }
-

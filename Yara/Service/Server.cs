@@ -38,7 +38,7 @@ namespace Yara.Service
                 string token;
                 if (UserToken == null)
                 {
-                    var data = db.LoadToken();
+                    var data = await db.LoadToken();
                     if (data == null)
                         token = "";
                     else
@@ -151,6 +151,10 @@ namespace Yara.Service
             return output;
 
         }
+
+        public static async Task<byte[]> GetProfileImageBytes(string Filename) =>
+            await new WebClient().DownloadDataTaskAsync(StaticData.ProfileImageURL + Filename);
+
 
     }
 }
