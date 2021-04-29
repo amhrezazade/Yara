@@ -11,11 +11,12 @@ using System.Text;
 
 namespace Yara.Models.ViewModels
 {
-    public class UserData
+    public class HomeData
     {
-        public int Id { set; get; } = 0;
-        public string Name { set; get; } = "";
-        public string StudentId { set; get; } = "";
-        public string ImageUrl { set; get; } = "";
+        public string Name { set; get; }
+        public string StudentCode { set; get; }
+        public string StudentId { set; get; }
+        public string practicesText { set; get; }
+        public string activeterm { get; set; }
     }
 }

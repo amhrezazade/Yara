@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -17,7 +18,7 @@ namespace Yara.Service
 {
     public static class db
     {
-        private static string localFileName = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "data.dat");
+        private static string localFileName = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "data.dat");
 
         public static async Task<appData> LoadAsync()
         {
@@ -99,17 +100,20 @@ namespace Yara.Service
             }
         }
 
-        public static async Task<byte[]> LoadProfileImage()
+        public static async Task<Bitmap> LoadProfileImage()
         {
             try
             {
-                return await File.ReadAllBytesAsync(localFileName + ".jpg");
+                var bytes =  await File.ReadAllBytesAsync(localFileName + ".jpg");
+                return  await BitmapFactory.DecodeByteArrayAsync(bytes, 0, bytes.Length);
             }
             catch //(Exception ex)
             {
                 return null;
             }
         }
+
+
 
         public static void clearData()
         {

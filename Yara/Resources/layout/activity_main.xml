@@ -9,14 +9,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
+        android:background="#000000"
         android:orientation="vertical"
         tools:context=".ProfileActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="240dp"
-            android:background="#293859" />
+            android:background="#00001a" />
 
         <!--Top Header Layout-->
         <LinearLayout
@@ -24,7 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-
             android:padding="16dp"
             android:orientation="horizontal">
 
@@ -32,7 +31,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="10dp"
-                android:src="@drawable/ic_arrow_back_24dp" />
+                android:src="@drawable/ic_arrow_back_24dp"
+                android:visibility="gone" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -42,36 +42,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profile"
+                android:text="اعلان یارا"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <RelativeLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_notifications_white_24dp" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="8dp"
-                    android:padding="4dp"
-                    android:src="@drawable/circleyellowfil" />
-            </RelativeLayout>
 
         </LinearLayout>
 
@@ -98,19 +72,13 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <androidx.cardview.widget.CardView
+
+                    <ImageView
                         android:layout_width="150dp"
-                        android:layout_height="90dp"
-                        app:cardCornerRadius="6dp"
-                        app:cardElevation="0dp">
-
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="90dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/pp" />
-
-                    </androidx.cardview.widget.CardView>
+                        android:layout_height="150dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/pp"
+                        android:id="@+id/ivprofileimage" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -120,16 +88,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Sanskar Tiwari"
-                            android:textColor="#424242"
+                            android:text="Firstname f"
+                            android:textColor="#00994d"
                             android:textSize="21sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:id="@+id/tvstudentname" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Android Developer"
-                            android:textSize="14sp" />
+                            android:text="98765432"
+                            android:textColor="#ff6600"
+                            android:textSize="14sp"
+                            android:id="@+id/tvstudentcode" />
 
 
                     </LinearLayout>
@@ -166,15 +137,18 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="97%"
+                                    android:text="123"
+                                    android:textColor="#ccff66"
                                     android:textSize="12sp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:id="@+id/tvstudentid" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
-                                    android:text="Salam"
+                                    android:textColor="#cc9900"
+                                    android:text="شناسه"
                                     android:textSize="12sp" />
                             </LinearLayout>
                         </LinearLayout>
@@ -203,15 +177,18 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="4.8/5"
+                                    android:text="992"
+                                    android:textColor="#ccff66"
                                     android:textSize="12sp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:id="@+id/tvactiveterm" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
-                                    android:text="salam salam"
+                                    android:textColor="#cc9900"
+                                    android:text="ترم جاری"
                                     android:textSize="12sp" />
                             </LinearLayout>
                         </LinearLayout>
@@ -221,19 +198,10 @@
 
                 <!--Option Bar-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/circularbordersolid"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-                </LinearLayout>
+ 
 
                 <!--Bootom Cards with sections-->
                 <LinearLayout
-                    android:id="@+id/personalinfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -244,13 +212,20 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/circularbordersolid"
                         android:orientation="vertical"
+                        android:layout_marginTop="10dp"
                         android:padding="16dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
-
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#0066cc"
+                                    android:text="تمارین"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -259,32 +234,31 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="about_me"
-                                    android:textSize="17sp"
-                                    android:textStyle="bold" />
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="20sp"
+                                    android:textColor="#e6ffff"
+                                    android:text="7 تمرین بی پاسخ"
+                                    android:id="@+id/tvpracticescaption" />
+
 
                                 <Space
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1" />
-
-                                <TextView
+                                <Button
+                                    android:background="@drawable/button_desgin"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                    android:text="نمایش"
+                                    android:textColor="#e6ffff"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Edit"
-                                    android:textColor="#FFCF66"
-                                    android:layout_marginEnd="10dp"
-                                    android:textSize="14sp" />
+                                    android:id="@+id/btshowpractice" />
+   
                             </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="my_desc" />
                         </LinearLayout>
-
                     </LinearLayout>
+
+
 
                     <!--Contact Details-->
                     <LinearLayout
@@ -348,6 +322,15 @@
                                     android:text="+91 7999193854"
                                     android:textSize="15sp"
                                     android:textColor="@android:color/darker_gray"/>
+
+
+                                                                <Button
+                                    android:background="@drawable/button_desgin"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                    android:text="نمایش"
+                                    android:textColor="#e6ffff"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -408,25 +391,6 @@
     </RelativeLayout>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:scrollbars="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@android:color/black"
-        android:layout_above="@+id/navigation"
-        android:visibility="invisible" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        app:itemIconTint="#ffcce0"
-        app:itemTextColor="@android:color/white"
-        android:background="#0d001a"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/navigation"
-        android:id="@+id/navigation" />
 
 </RelativeLayout>

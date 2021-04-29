@@ -32,6 +32,7 @@ namespace Yara.Activity
             mRecyclerView = FindViewById<RecyclerView>(Resource.Id.PracticesrecyclerView);
             mRecyclerView.SetLayoutManager(new LinearLayoutManager(this));
             navigation.SetOnNavigationItemSelectedListener(this);
+            mRecyclerView.SetAdapter(new ContentItemAdapter(_data.InScope.ToArray()));
         }
 
 

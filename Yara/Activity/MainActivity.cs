@@ -13,46 +13,48 @@ using Yara.Adapters;
 using System.Collections.Generic;
 using Yara.Models.ViewModels;
 using Yara.Service;
+using Android.Content;
+using System.Threading.Tasks;
 
 namespace Yara.Activity
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
-    public class MainActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    public class MainActivity : AppCompatActivity
     {
-        RecyclerView mRecyclerView;
-        MainActivityService _service;
+
+        private async void LoadImage()
+        {
+            FindViewById<ImageView>(Resource.Id.ivprofileimage).SetImageBitmap(await db.LoadProfileImage());
+        }
+        
+        private void fillText()
+        {
+            
+            var data = db.Load().Home;
+            FindViewById<TextView>(Resource.Id.tvstudentname).Text = data.Name;
+            FindViewById<TextView>(Resource.Id.tvstudentcode).Text = data.StudentCode;
+            FindViewById<TextView>(Resource.Id.tvpracticescaption).Text = data.practicesText;
+            FindViewById<TextView>(Resource.Id.tvstudentid).Text = data.StudentId;
+            FindViewById<TextView>(Resource.Id.tvactiveterm).Text = data.activeterm;
+        }
+        
+        private void setClickvent()
+        {
+            FindViewById<Button>(Resource.Id.btshowpractice).Click += (s, e) =>
+            {
+                StartActivity(new Intent(Application.Context, typeof(PracticesActivity)));
+            };
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
-            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            _service = new MainActivityService();
-            mRecyclerView = FindViewById<RecyclerView>(Resource.Id.recyclerView);
-            mRecyclerView.SetLayoutManager(new LinearLayoutManager(this));
-            navigation.SetOnNavigationItemSelectedListener(this);
-        }
-
-
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-        public bool OnNavigationItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Resource.Id.navigation_home:
-                    return true;
-                case Resource.Id.navigation_dashboard:
-                    return true;
-
-            }
-            return false;
+            fillText();
+            setClickvent();
+            Task startupWork = new Task(() => { LoadImage(); });
+            startupWork.Start();
         }
     }
 

@@ -75,11 +75,10 @@
     <Compile Include="Models\apiModels\Practices.cs" />
     <Compile Include="Models\appData.cs" />
     <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\ViewModels\HomeData.cs" />
+    <Compile Include="Models\ViewModels\practices.cs" />
     <Compile Include="Models\StaticData.cs" />
-    <Compile Include="Models\ViewModels\AnnouncesItem.cs" />
     <Compile Include="Models\ViewModels\ContentItem.cs" />
-    <Compile Include="Models\ViewModels\LessonItem.cs" />
-    <Compile Include="Models\ViewModels\PracticesItem.cs" />
     <Compile Include="Models\ViewModels\SeenInformation.cs" />
     <Compile Include="Service\Date_Time.cs" />
     <Compile Include="Service\db.cs" />
@@ -91,7 +90,6 @@
     <Compile Include="Models\apiModels\Login.cs" />
     <Compile Include="Models\apiModels\Student.cs" />
     <Compile Include="Models\ApiResult.cs" />
-    <Compile Include="Models\ViewModels\UserData.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Application.cs" />

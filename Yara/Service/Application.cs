@@ -82,18 +82,16 @@ namespace Yara.Service
             
 
             var studentResult = await Api.GetStudetData();
-
-
-            if (studentResult.OK)
-                data.Home.Add(new ContentItem(studentResult.data));
-
-
             var TermListRes = await Api.GetTermList();
- 
             var ActiveTermRes = await Api.GetActiveTermId();
 
+            var imagebytes = await Server.GetProfileImageBytes(studentResult.data.ImageFileName);
+            await db.SaveProfileImage(imagebytes);
+            data.Home.Name = studentResult.data.FirstName + " " +  studentResult.data.LastName;
+            data.Home.StudentCode = studentResult.data.StudentCode;
+            data.Home.StudentId = studentResult.data.StudentID.ToString();
             int ActiveTerm = ActiveTermRes.data.ActiveTerm;
-
+            data.Home.activeterm = ActiveTerm.ToString();
             Lesson[] Lessons = null;
             foreach (var term in TermListRes.data)
                 if (term.Term == ActiveTerm)
@@ -104,7 +102,7 @@ namespace Yara.Service
             if(Lessons ==null)
                 return "خطا";
 
-
+            int practiceCount = 0;
             foreach (var l in Lessons)
             {
                 
@@ -125,7 +123,10 @@ namespace Yara.Service
                     if (p.RegedAnswer == null)
                     {
                         if (p.InRegAnswerScope)
+                        {
                             insope.Add(p);
+                            practiceCount++;
+                        }
                         else
                             lost.Add(p);
                     }
@@ -153,6 +154,9 @@ namespace Yara.Service
                         data.practicesList.Lost.Add(new ContentItem(i));
                 }
             }
+
+            data.Home.practicesText = practiceCount.ToString() + "تمرین آماده پاسخ  ";
+
 
             await db.Save(data);
 
