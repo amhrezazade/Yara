@@ -49,7 +49,6 @@ namespace Yara.Service
 
                 client.Headers.Add("x-auth-token", token);
 
-                //client.Headers.Add("user-agent", StaticData.UserAgent);
                 client.Headers[HttpRequestHeader.UserAgent] = StaticData.UserAgent;
 
                 if (body == string.Empty)
@@ -117,10 +116,11 @@ namespace Yara.Service
 
         public static async Task<TestApiResult> Test()
         {
+            var data = await db.LoadToken();
+            if (data == null)
+                return TestApiResult.DataNull;
             string url = "/api/lessons/activeTerm";
             var r = await Request(url,string.Empty);
-            if (r.code == 502)
-                return TestApiResult.DataNull;
             if (r.code == 200)
                 return TestApiResult.OK;
             if (r.code == 503)
@@ -140,6 +140,23 @@ namespace Yara.Service
             return output;
 
         }
+
+        public static async Task Put(string rout)
+        {
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create(StaticData.BaseUrl + rout);
+                request.Headers.Add("x-auth-token", await db.LoadToken());
+                request.Method = "PUT";
+                request.ContentLength = 0;
+                request.Host = StaticData.ServerHost;
+                await request.GetResponseAsync();
+            }
+            catch(Exception ex)
+            {
+            }
+        }
+
 
         public static async Task<ApiResult> Post(string rout, string body)
         {

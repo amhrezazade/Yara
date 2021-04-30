@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,27 +15,49 @@ using System.Text;
 using System.Threading.Tasks;
 using Yara.Models;
 using Yara.Models.apiModels;
+using Yara.Models.ViewModels;
 
 namespace Yara.Service
 {
     public static class Api
     {
-        private static async Task<ApiResult<ResType>> GetObject<ResType>(string Rout)
-        {
-            var res = await Server.Get(Rout);
-            if (res.ok)
-                return new ApiResult<ResType>(JsonConvert.DeserializeObject<ResType>(res.Res));
-            return new ApiResult<ResType>(res.ok, res.Res);
-        }
-
         public static async Task<ApiResult<string>> Login(LoginModel m)
         {
             string rout = "/api/auth";
             string body = JsonConvert.SerializeObject(m);
             var res = await Server.Post(rout, body);
-            return new ApiResult<string>(res.Res,res.ok,res.Res);
+            return new ApiResult<string>(res.Res, res.ok, res.Res);
         }
-        
+
+        private static async Task<ApiResult<ResType>> GetObject<ResType>(string Rout)
+        {
+            var res = await Server.Get(Rout);
+
+            if (res.ok)
+                try
+                {
+                    return new ApiResult<ResType>(JsonConvert.DeserializeObject<ResType>(res.Res));
+                }
+                catch 
+                {
+                    try
+                    {
+                        JObject json = JObject.Parse(res.Res);
+                        string error = json["Error"].ToString();
+                        return new ApiResult<ResType>(false, error);
+                    }
+                    catch
+                    {
+                        return new ApiResult<ResType>(false, res.Res);
+                    }
+                }
+
+            return new ApiResult<ResType>(res.ok, res.Res);
+        }
+
+        public static async void SeenAnnounce(int AnnouncesId) =>
+             await Server.Put("/api/announces/seen/" + AnnouncesId.ToString());
+
         public static async Task<ApiResult<Student>> GetStudetData(string UserToken = null) =>
             await GetObject<Student>("/api/students");
         

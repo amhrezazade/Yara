@@ -44,14 +44,6 @@ namespace Yara.Activity
             }
 
 
-            if (res != "OK")
-            {
-                //Toast.MakeText(Application.Context, res, ToastLength.Long).Show();
-                Finish();
-                return;
-            }
-
-
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
 
         }

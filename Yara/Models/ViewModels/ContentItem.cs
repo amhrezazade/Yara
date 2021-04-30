@@ -76,20 +76,19 @@ namespace Yara.Models.ViewModels
         {
             Titel = a.Title;
             Caption = a.Description;
-            date = a.RegDate;
+            date = App.GetDateString(a.RegDate,a.RegTime);
             if (a.SeenInfo == null)
             {
-                Def = "جدید";
                 GreenNote = string.Empty;
-                RedNote = string.Empty;
+                RedNote = "جدید";
             }
             else 
             {
-                Def = string.Empty;
                 GreenNote = "دیده شده در ";
                 var inf = JsonConvert.DeserializeObject<SeenInformation>(a.SeenInfo);
                 RedNote = App.GetDateString(inf.VisitDate, inf.VisitTime);
             }
+            Def = a.AnnounceID.ToString();
             if (a.FileName == string.Empty)
                 Link = "";
             else

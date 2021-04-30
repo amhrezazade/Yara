@@ -103,6 +103,7 @@ namespace Yara.Service
                 return "خطا";
 
             int practiceCount = 0;
+            int announcesCount = 0;
             foreach (var l in Lessons)
             {
                 
@@ -114,7 +115,12 @@ namespace Yara.Service
 
                 data.Announces.Add(new ContentItem(titel));
                 foreach (var a in AnnouncesRes.data)
+                {
                     data.Announces.Add(new ContentItem(a));
+                    if (a.SeenInfo == null)
+                        announcesCount++;
+                }
+                    
 
                 List<Practices> insope = new List<Practices>();
                 List<Practices> answered = new List<Practices>();
@@ -155,8 +161,8 @@ namespace Yara.Service
                 }
             }
 
-            data.Home.practicesText = practiceCount.ToString() + "تمرین آماده پاسخ  ";
-
+            data.Home.practicesText = practiceCount.ToString() + " تمرین آماده پاسخ  ";
+            data.Home.announcesText = announcesCount.ToString() + " اعلان جدید  ";
 
             await db.Save(data);
 

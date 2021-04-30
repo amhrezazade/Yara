@@ -13,10 +13,13 @@ namespace Yara.Models
 {
     public static class StaticData
     {
-        public const string BaseUrl = "https://yaraapi.mazust.ac.ir";
+        public const string ServerProtocol = "https://";
+        public const string ServerHost = "yaraapi.mazust.ac.ir";
+        public const string BaseUrl = ServerProtocol + ServerHost;
+        public const string DownloadpracticesURL = BaseUrl + "/static/practices/";
+        public const string DownloadannouncesURL = BaseUrl + "/static/announces/";
+
         public const string UserAgent = "Yara Notifier Android Application";
         public const string ProfileImageURL = "https://reg.mazust.ac.ir/CPanel/StudentsImages/";
-        public const string DownloadpracticesURL = "https://yaraapi.mazust.ac.ir/static/practices/";
-        public const string DownloadannouncesURL = "https://yaraapi.mazust.ac.ir/static/announces/";
     }
 }

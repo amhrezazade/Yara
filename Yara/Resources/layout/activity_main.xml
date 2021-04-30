@@ -205,7 +205,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!--About Me Card-->
+                    <!--Practices Card-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -219,17 +219,16 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="#0066cc"
-                                    android:text="تمارین"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#0066cc"
+                                android:text="تمارین"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -238,8 +237,6 @@
                                     android:textColor="#e6ffff"
                                     android:text="7 تمرین بی پاسخ"
                                     android:id="@+id/tvpracticescaption" />
-
-
                                 <Space
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -252,136 +249,63 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/btshowpractice" />
-   
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
+                    <!--End Card-->
 
 
-
-                    <!--Contact Details-->
+                     <!--Practices Card-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:background="@drawable/circularbordersolid"
                         android:orientation="vertical"
+                        android:layout_marginTop="10dp"
                         android:padding="16dp">
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="contact"
-                                android:textSize="17sp"
-                                android:textStyle="bold" />
-
-                            <Space
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Edit"
-                                android:textColor="#FFCF66"
-                                android:layout_marginEnd="10dp"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
                             android:orientation="vertical">
-
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-
-                                android:paddingRight="8dp"
+                                android:textColor="#0066cc"
+                                android:text="اعلان ها"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:orientation="horizontal">
-
-                                <android.support.v7.widget.AppCompatImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:background="@drawable/circular_grey_bordersolid"
-                                    android:padding="10dp"
-                                    android:src="@drawable/ic_note" />
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="20dp"
-                                    android:text="+91 7999193854"
-                                    android:textSize="15sp"
-                                    android:textColor="@android:color/darker_gray"/>
-
-
-                                                                <Button
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="20sp"
+                                    android:textColor="#e6ffff"
+                                    android:text="7 اعلان "
+                                    android:id="@+id/tvannouncescaption" />
+                                <Space
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+                                <Button
                                     android:background="@drawable/button_desgin"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                     android:text="نمایش"
                                     android:textColor="#e6ffff"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-
-                                android:paddingRight="8dp"
-                                android:orientation="horizontal">
-
-                                <android.support.v7.widget.AppCompatImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:background="@drawable/circular_grey_bordersolid"
-                                    android:padding="10dp"
-                                    android:src="@drawable/ic_note" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="20dp"
-                                    android:textColor="@android:color/darker_gray"
-                                    android:text="sanskar@theindianappguy.com"
-                                    android:textSize="15sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-  
-                                android:paddingRight="8dp"
-                                android:orientation="horizontal">
-
-                                <android.support.v7.widget.AppCompatImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:background="@drawable/circular_grey_bordersolid"
-                                    android:padding="10dp"
-                                    android:src="@drawable/ic_note" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="20dp"
-                                    android:text="Leeds, United Kingdom"
-                                    android:textSize="15sp"
-                                    android:textColor="@android:color/darker_gray" />
-
+                                    android:id="@+id/btannouncesshow" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
+                    <!--End Card-->
+
+
+
+
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

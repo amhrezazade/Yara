@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Yara.Models.ViewModels;
 using Yara.Service;
@@ -74,9 +75,15 @@ namespace Yara.Adapters
 
 
             if(item.date == "")
+            {
                 vh.ivShareImage.Visibility = ViewStates.Invisible;
+            }
+                
             else
+            {
                 vh.ivShareImage.Visibility = ViewStates.Visible;
+            }
+                
 
 
             if (item.Link == "")
@@ -109,6 +116,11 @@ namespace Yara.Adapters
                 case Models.ImageType.Motif:
                     vh.ivImage.Visibility = ViewStates.Visible;
                     vh.ivImage.SetImageResource(Resource.Drawable.ic_notif);
+                    if(item.RedNote == "جدید")
+                        Task.Run(() =>
+                        {
+                            Api.SeenAnnounce(int.Parse(item.Def));
+                        });
                     break;
                 case Models.ImageType.Note:
                     vh.ivImage.Visibility = ViewStates.Visible;
