@@ -75,6 +75,7 @@
     <Compile Include="Models\apiModels\Announces.cs" />
     <Compile Include="Models\apiModels\Answer.cs" />
     <Compile Include="Models\apiModels\EduClasse.cs" />
+    <Compile Include="Models\apiModels\Exam.cs" />
     <Compile Include="Models\apiModels\LessonInfo.cs" />
     <Compile Include="Models\apiModels\Member.cs" />
     <Compile Include="Models\apiModels\Practices.cs" />
@@ -293,6 +294,9 @@
     <AndroidResource Include="Resources\layout\ContentItemActivity.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_exam.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
