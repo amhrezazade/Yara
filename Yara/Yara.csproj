@@ -67,8 +67,10 @@
     <Compile Include="Activity\AnnouncesActivity.cs" />
     <Compile Include="Activity\LoginActivity.cs" />
     <Compile Include="Activity\PracticesActivity.cs" />
+    <Compile Include="Activity\ResourceActivity.cs" />
     <Compile Include="Activity\splash.cs" />
     <Compile Include="Adapters\ContentItemAdapter.cs" />
+    <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Models\apiModels\ActiveTermId.cs" />
     <Compile Include="Models\apiModels\Announces.cs" />
     <Compile Include="Models\apiModels\Answer.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Models\apiModels\LessonInfo.cs" />
     <Compile Include="Models\apiModels\Member.cs" />
     <Compile Include="Models\apiModels\Practices.cs" />
+    <Compile Include="Models\apiModels\Resource.cs" />
     <Compile Include="Models\appData.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ViewModels\HomeData.cs" />
@@ -83,7 +86,7 @@
     <Compile Include="Models\StaticData.cs" />
     <Compile Include="Models\ViewModels\ContentItem.cs" />
     <Compile Include="Models\ViewModels\SeenInformation.cs" />
-    <Compile Include="Service\Date_Time.cs" />
+    <Compile Include="Helper\CommonExtensions.cs" />
     <Compile Include="Service\db.cs" />
     <Compile Include="Activity\MainActivity.cs" />
     <Compile Include="Models\apiModels\Lesson.cs" />
@@ -295,6 +298,14 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\AnnouncesActivity.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ResourceActivity.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

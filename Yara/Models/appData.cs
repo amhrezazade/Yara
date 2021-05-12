@@ -20,8 +20,9 @@ namespace Yara.Models
         //public List<LessonItem> Lessons { set; get; }
         public HomeData Home { set; get; } = new HomeData();
         public List<ContentItem> Announces { set; get; } = new List<ContentItem>();
-        public List<ContentItem> Exams { set; get; } = new List<ContentItem>();
+        public List<ContentItem> Exams { set; get; } = new List<ContentItem>(); 
         public List<ContentItem> Teachers { set; get; } = new List<ContentItem>();
+        public List<ContentItem> Resources { set; get; } = new List<ContentItem>();
         public practices practicesList { set; get; } = new practices();
     }
 }

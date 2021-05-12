@@ -31,8 +31,8 @@ namespace Yara.Adapters
         public ImageView ivImage { get; }
         public ImageView ivShareImage { get; }
         public ContentItemViewHolder(View itemView) : base(itemView)
-        {
-            Item = itemView;
+        {           
+            Item = itemView.FindViewById(Resource.Id.ContentItemView);
             tvDate = (TextView)itemView.FindViewById(Resource.Id.tvDateTime);
             tvN1 = (TextView)itemView.FindViewById(Resource.Id.tvNote1);
             tvN2 = (TextView)itemView.FindViewById(Resource.Id.tvNote2);
@@ -110,6 +110,10 @@ namespace Yara.Adapters
                 });
             };
 
+            if(item.Image == Models.ImageType.Subject)
+                vh.Item.SetBackgroundColor(Color.Black);
+            else
+                vh.Item.SetBackgroundColor(Color.Rgb(30, 30, 30));
 
             switch (item.Image)
             {
@@ -117,10 +121,17 @@ namespace Yara.Adapters
                     vh.ivImage.Visibility = ViewStates.Visible;
                     vh.ivImage.SetImageResource(Resource.Drawable.ic_notif);
                     if(item.RedNote == "جدید")
+                    {
                         Task.Run(() =>
                         {
                             Api.SeenAnnounce(int.Parse(item.Def));
                         });
+                        vh.Item.SetBackgroundColor(Color.Rgb(60,0,80));
+                    }
+                    break;
+                case Models.ImageType.Cloud:
+                    vh.ivImage.Visibility = ViewStates.Visible;
+                    vh.ivImage.SetImageResource(Resource.Drawable.ic_cloud);
                     break;
                 case Models.ImageType.Note:
                     vh.ivImage.Visibility = ViewStates.Visible;
@@ -136,6 +147,7 @@ namespace Yara.Adapters
                     break;
                 default:
                     vh.ivImage.Visibility = ViewStates.Invisible;
+                    vh.Item.SetBackgroundColor(Color.Black);
                     break;
             }
 

@@ -24,7 +24,15 @@ namespace Yara.Activity
 
         private async void LoadImage()
         {
-            FindViewById<ImageView>(Resource.Id.ivprofileimage).SetImageBitmap(await db.LoadProfileImage());
+            var iv = FindViewById<ImageView>(Resource.Id.ivprofileimage);
+            try
+            {
+                iv.SetImageBitmap(await db.LoadProfileImage());
+            }
+            catch
+            {
+                iv.SetImageResource(Resource.Drawable.ic_baseline_person_24);
+            }
         }
         
         private void fillText()
@@ -37,6 +45,7 @@ namespace Yara.Activity
             FindViewById<TextView>(Resource.Id.tvstudentid).Text = data.StudentId;
             FindViewById<TextView>(Resource.Id.tvactiveterm).Text = data.activeterm;
             FindViewById<TextView>(Resource.Id.tvannouncescaption).Text = data.announcesText;
+            FindViewById<TextView>(Resource.Id.tvresourcescaption).Text = data.resourcesText;
         }
         
         private void setClickvent()
@@ -48,6 +57,10 @@ namespace Yara.Activity
             FindViewById<Button>(Resource.Id.btannouncesshow).Click += (s, e) =>
             {
                 StartActivity(new Intent(Application.Context, typeof(AnnouncesActivity)));
+            };
+            FindViewById<Button>(Resource.Id.btresourcesshow).Click += (s, e) =>
+            {
+                StartActivity(new Intent(Application.Context, typeof(ResourceActivity)));
             };
         }
 

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Yara.Helper;
 using Yara.Models.apiModels;
 using Yara.Service;
 
@@ -31,9 +32,9 @@ namespace Yara.Models.ViewModels
         {
             Titel = p.Title;
             Caption = p.Description;
-            date = App.GetDateString(p.RegDate, p.RegTime);
-            GreenNote = App.GetDateString(p.StartDate, p.StartTime);
-            RedNote = App.GetDateString(p.FinishDate, p.FinishTime);
+            date = DateTimeHelper.GetDateString(p.RegDate, p.RegTime);
+            GreenNote = DateTimeHelper.GetDateString(p.StartDate, p.StartTime);
+            RedNote = DateTimeHelper.GetDateString(p.FinishDate, p.FinishTime);
             Def = "نمره " + p.Score + " از " + p.ScoreBase;
             if (p.FileName == string.Empty)
                 Link = "";
@@ -76,7 +77,7 @@ namespace Yara.Models.ViewModels
         {
             Titel = a.Title;
             Caption = a.Description;
-            date = App.GetDateString(a.RegDate,a.RegTime);
+            date = DateTimeHelper.GetDateString(a.RegDate,a.RegTime);
             if (a.SeenInfo == null)
             {
                 GreenNote = string.Empty;
@@ -86,7 +87,7 @@ namespace Yara.Models.ViewModels
             {
                 GreenNote = "دیده شده در ";
                 var inf = JsonConvert.DeserializeObject<SeenInformation>(a.SeenInfo);
-                RedNote = App.GetDateString(inf.VisitDate, inf.VisitTime);
+                RedNote = DateTimeHelper.GetDateString(inf.VisitDate, inf.VisitTime);
             }
             Def = a.AnnounceID.ToString();
             if (a.FileName == string.Empty)
@@ -97,8 +98,36 @@ namespace Yara.Models.ViewModels
             Image = ImageType.Motif;
             ClearNull();
         }
+
+        public ContentItem(Resources a)
+        {
+            Titel = a.Title;
+            Caption = a.Description;
+            date = DateTimeHelper.GetDateString(a.RegDate, a.RegTime);
+            GreenNote = string.Empty;
+            RedNote = string.Empty;
+            Def = a.ResourceID.ToString();
+            if (a.FileName == string.Empty)
+                Link = "";
+            else
+                Link = StaticData.DownloadannouncesURL + a.FileName;
+            LinkTitel = "فایل پیوست";
+            Image = ImageType.Cloud;
+            ClearNull();
+        }
+
+
         public ContentItem()
         {
+            Titel = string.Empty;
+            Caption = string.Empty;
+            date = string.Empty;
+            GreenNote = string.Empty;
+            RedNote = string.Empty;
+            Def = string.Empty;
+            Link = string.Empty;
+            LinkTitel = string.Empty;
+            Image = ImageType.None;
         }
 
         private void ClearNull()

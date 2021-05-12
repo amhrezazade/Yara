@@ -38,7 +38,7 @@ namespace Yara.Service
                 {
                     return new ApiResult<ResType>(JsonConvert.DeserializeObject<ResType>(res.Res));
                 }
-                catch 
+                catch
                 {
                     try
                     {
@@ -60,7 +60,7 @@ namespace Yara.Service
 
         public static async Task<ApiResult<Student>> GetStudetData(string UserToken = null) =>
             await GetObject<Student>("/api/students");
-        
+
         public static async Task<ApiResult<TermItem[]>> GetTermList() =>
             await GetObject<TermItem[]>("/api/lessons/student");
 
@@ -69,6 +69,9 @@ namespace Yara.Service
 
         public static async Task<ApiResult<Announces[]>> GetAnnounces(int LessonId) =>
             await GetObject<Announces[]>("/api/announces/actives/" + LessonId.ToString());
+
+        public static async Task<ApiResult<Yara.Models.apiModels.Resources[]>> GetResources(int LessonId) =>
+            await GetObject<Yara.Models.apiModels.Resources[]>("/api/resources/actives/" + LessonId.ToString());
 
         public static async Task<ApiResult<Practices[]>> GetPractices(int LessonId) =>
             await GetObject<Practices[]>("/api/practices/actives/" + LessonId.ToString());

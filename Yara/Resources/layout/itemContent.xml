@@ -14,8 +14,9 @@
         >
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="#0d0d0d"
-            android:layout_height="match_parent">
+            android:background="#1a1a1a"
+            android:layout_height="match_parent"
+            android:id="@+id/ContentItemView">
 
 
             <Button
@@ -23,12 +24,12 @@
                 android:text="فایل پیوستی"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:textColor="#ffcc00"  
-                android:background="#1a1a1a"
+                android:textColor="#ffcc00"
+                android:background="#262626"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnFileContent" />
 
-             <androidx.appcompat.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_below="@+id/ivImageContent"
                 android:layout_alignParentRight="true"
                 android:layout_width="40dp"
@@ -67,12 +68,12 @@
                 android:layout_height="wrap_content"
                 android:text="این یک توضیح بلند است و نشان دهنده یک توضیح برای عنوان است"
                 android:textSize="16sp"
-                android:textColor="@android:color/white" 
+                android:textColor="@android:color/white"
                 android:layout_toLeftOf="@+id/ivImageContent"
                 android:layout_marginRight="5.6dp"
                 android:layout_marginTop="1.5dp"
                 android:paddingBottom="10dp"/>
- 
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateTime"
                 android:layout_width="wrap_content"

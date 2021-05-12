@@ -18,6 +18,7 @@ namespace Yara.Models
         Profile,
         Subject,
         Person,
+        Cloud,
         None
 
 

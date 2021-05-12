@@ -169,9 +169,17 @@ namespace Yara.Service
 
         }
 
-        public static async Task<byte[]> GetProfileImageBytes(string Filename) =>
-            await new WebClient().DownloadDataTaskAsync(StaticData.ProfileImageURL + Filename);
-
+        public static async Task<byte[]> GetProfileImageBytes(string Filename)
+        {
+            try 
+            {
+                return await new WebClient().DownloadDataTaskAsync(StaticData.ProfileImageURL + Filename);
+            }
+            catch 
+            {
+                return null;
+            }
+        }
 
     }
 }
