@@ -25,8 +25,8 @@ namespace Yara.Activity
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            SetContentView(Resource.Layout.ResourceActivity);
-            var rv = FindViewById<RecyclerView>(Resource.Id.resourcerecyclerview);
+            SetContentView(Resource.Layout.ContentItemActivity);
+            var rv = FindViewById<RecyclerView>(Resource.Id.contentitemrecyclerview);
             rv.SetLayoutManager(new LinearLayoutManager(this));
             rv.SetAdapter(new ContentItemAdapter(db.Load().Resources.ToArray()));
         }

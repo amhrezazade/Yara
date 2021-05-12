@@ -201,11 +201,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\NotifsLayout.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_eye.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -216,11 +211,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\border_group_id.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\itemNotif.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\itemContent.xml">
@@ -297,15 +287,10 @@
     <AndroidResource Include="Resources\drawable\ic_cur.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\AnnouncesActivity.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_cloud.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\ResourceActivity.xml">
+    <AndroidResource Include="Resources\layout\ContentItemActivity.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
