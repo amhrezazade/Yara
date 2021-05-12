@@ -28,14 +28,14 @@ namespace Yara.Models.ViewModels
         public ImageType Image { set; get; }
 
 
-        public ContentItem(Practices p)
+        public ContentItem(Practices p,string LessonName)
         {
             Titel = p.Title;
-            Caption = p.Description;
+            Caption = p.Description + "\r\n" + "نمره " + p.Score + " از " + p.ScoreBase;
             date = DateTimeHelper.GetDateString(p.RegDate, p.RegTime);
             GreenNote = DateTimeHelper.GetDateString(p.StartDate, p.StartTime);
             RedNote = DateTimeHelper.GetDateString(p.FinishDate, p.FinishTime);
-            Def = "نمره " + p.Score + " از " + p.ScoreBase;
+            Def = LessonName + " (" + p.PracticeID . ToString() + ")";
             if (p.FileName == string.Empty)
                 Link = "";
             else
@@ -59,21 +59,9 @@ namespace Yara.Models.ViewModels
             ClearNull();
         }
 
-        public ContentItem(Student s)
-        {
-            Titel = s.FirstName + " " + s.LastName;
-            Caption = s.StudentCode;
-            date = string.Empty;
-            GreenNote = "Id:";
-            RedNote = s.StudentID.ToString();
-            Def = string.Empty;
-            Link = string.Empty;
-            LinkTitel = string.Empty;
-            Image = ImageType.Profile;
-            ClearNull();
-        }
+ 
 
-        public ContentItem(Announces a)
+        public ContentItem(Announces a, string LessonName)
         {
             Titel = a.Title;
             Caption = a.Description;
@@ -89,7 +77,7 @@ namespace Yara.Models.ViewModels
                 var inf = JsonConvert.DeserializeObject<SeenInformation>(a.SeenInfo);
                 RedNote = DateTimeHelper.GetDateString(inf.VisitDate, inf.VisitTime);
             }
-            Def = a.AnnounceID.ToString();
+            Def = LessonName + " (" + a.AnnounceID.ToString() + ")";
             if (a.FileName == string.Empty)
                 Link = "";
             else
@@ -99,14 +87,14 @@ namespace Yara.Models.ViewModels
             ClearNull();
         }
 
-        public ContentItem(Resources a)
+        public ContentItem(Resources a, string LessonName)
         {
             Titel = a.Title;
             Caption = a.Description;
             date = DateTimeHelper.GetDateString(a.RegDate, a.RegTime);
             GreenNote = string.Empty;
             RedNote = string.Empty;
-            Def = a.ResourceID.ToString();
+            Def = LessonName + " (" + a.ResourceID.ToString() + ")";
             if (a.FileName == string.Empty)
                 Link = "";
             else

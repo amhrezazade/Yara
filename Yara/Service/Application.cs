@@ -117,7 +117,7 @@ namespace Yara.Service
                     data.Announces.Add(new ContentItem(titel));
                     foreach (var a in AnnouncesRes.data)
                     {
-                        data.Announces.Add(new ContentItem(a));
+                        data.Announces.Add(new ContentItem(a, l.LessonTitle));
                         if (a.SeenInfo == null)
                             announcesCount++;
                     }
@@ -125,13 +125,13 @@ namespace Yara.Service
 
                 if (ResourcesRes.data.Length > 0)
                 {
-                    data.Resources.Add(new ContentItem());
                     data.Resources.Add(new ContentItem(titel));
                     foreach (var a in ResourcesRes.data)
                     {
-                        data.Resources.Add(new ContentItem(a));
+                        data.Resources.Add(new ContentItem(a, l.LessonTitle));
                         ResourcesCount++;
                     }
+                    data.Resources.Add(new ContentItem());
                 }
 
                 List<Practices> insope = new List<Practices>();
@@ -152,27 +152,27 @@ namespace Yara.Service
                         answered.Add(p);
 
                 if (insope.Count > 0)
-                {
-                    data.practicesList.InScope.Add(new ContentItem());
+                {     
                     data.practicesList.InScope.Add(new ContentItem(titel));
                     foreach (var i in insope)
-                        data.practicesList.InScope.Add(new ContentItem(i));
+                        data.practicesList.InScope.Add(new ContentItem(i, l.LessonTitle));
+                    data.practicesList.InScope.Add(new ContentItem());
                 }
 
                 if (answered.Count > 0)
                 {
-                    data.practicesList.Answered.Add(new ContentItem());
                     data.practicesList.Answered.Add(new ContentItem(titel));
                     foreach (var i in answered)
-                        data.practicesList.Answered.Add(new ContentItem(i));
+                        data.practicesList.Answered.Add(new ContentItem(i, l.LessonTitle));
+                    data.practicesList.Answered.Add(new ContentItem());
                 }
 
                 if (lost.Count > 0)
                 {
-                    data.practicesList.Lost.Add(new ContentItem());
                     data.practicesList.Lost.Add(new ContentItem(titel));
                     foreach (var i in lost)
-                        data.practicesList.Lost.Add(new ContentItem(i));
+                        data.practicesList.Lost.Add(new ContentItem(i, l.LessonTitle));
+                    data.practicesList.Lost.Add(new ContentItem());
                 }
             }
 
