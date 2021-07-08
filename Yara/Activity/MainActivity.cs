@@ -46,6 +46,9 @@ namespace Yara.Activity
             FindViewById<TextView>(Resource.Id.tvactiveterm).Text = data.activeterm;
             FindViewById<TextView>(Resource.Id.tvannouncescaption).Text = data.announcesText;
             FindViewById<TextView>(Resource.Id.tvresourcescaption).Text = data.resourcesText;
+            FindViewById<TextView>(Resource.Id.tvexam).Text = data.examText;
+            FindViewById<TextView>(Resource.Id.tvtoday).Text = data.todayText;
+
         }
         
         private void setClickvent()
@@ -61,6 +64,14 @@ namespace Yara.Activity
             FindViewById<Button>(Resource.Id.btresourcesshow).Click += (s, e) =>
             {
                 StartActivity(new Intent(Application.Context, typeof(ResourceActivity)));
+            };
+            FindViewById<Button>(Resource.Id.btshowexam).Click += (s, e) =>
+            {
+                StartActivity(new Intent(Application.Context, typeof(ExamActivity)));
+            };
+            FindViewById<Button>(Resource.Id.btshowtoday).Click += (s, e) =>
+            {
+                StartActivity(new Intent(Application.Context, typeof(TodayActivity)));
             };
         }
 

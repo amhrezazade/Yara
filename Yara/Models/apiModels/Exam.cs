@@ -28,12 +28,12 @@ namespace Yara.Models.apiModels
         public bool NeedAuthentication { set; get; }
         public bool IsScoreVisible { set; get; }
         public bool IsActive { set; get; }
-        public double TotalScore { set; get; }
+        public double? TotalScore { set; get; }
         public int QuestionsCount { set; get; }
         public int AnsweredQuestionsCount { set; get; }
         public bool IsAuthenticated { set; get; }
         public bool InExamScope { set; get; }
         public bool InAuthProcessScope { set; get; }
-        public double StudentScore { set; get; }
+        public double? StudentScore { set; get; }
     }
 }

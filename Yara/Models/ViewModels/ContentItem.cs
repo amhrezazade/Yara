@@ -87,6 +87,54 @@ namespace Yara.Models.ViewModels
             ClearNull();
         }
 
+        public ContentItem(Exam e, string LessonName)
+        {
+            Caption = " شماره آزمون : " + e.ExamID;
+
+            Caption += "\r\n" +
+                " شماره گروه :   " + e.GroupID;
+
+
+            if (e.StudentScore != null && e.TotalScore != null)
+                Caption += "\r\n" +
+                    " 🔘نمره شما : " + e.StudentScore.Value.ToString() + " از " + e.TotalScore.Value.ToString();
+
+            Caption += "\r\n" +
+                +e.AnsweredQuestionsCount + " سوال پاسخ داده شده از  " + e.QuestionsCount;
+
+            if (e.NeedAuthentication)
+            {
+                Caption += "\r\n" + " نیاز به احراز هویت پیامکی دارد🔒  ";
+
+                if (e.InAuthProcessScope)
+                    Caption += "\r\n" + " ❕شما در بازه احراز هویت قرار دارید ";
+
+                if (e.IsAuthenticated)
+                    Caption += "\r\n" + " احراز هویت انجام شده است✅ ";
+            }  
+            else
+                Caption += "\r\n" + " نیاز به احراز هویت پیامکی ندارد🔓  ";
+
+            if (e.InExamScope)
+                Caption += "\r\n" + " 📃آزمون در حال اجرا...  ";
+
+
+            Caption += "\r\n" + e.Description;
+
+            if(e.AnsweredQuestionsCount == 0)
+                Titel = e.Title;
+            else
+                Titel = e.Title + " (شرکت کرده) ";
+            date = DateTimeHelper.GetDateString(e.RegDate, e.RegTime);
+            GreenNote = DateTimeHelper.GetDateString(e.StartDate, e.StartTime);
+            RedNote = DateTimeHelper.GetDateString(e.FinishDate, e.FinishTime);
+            Def = LessonName;
+            Link = "";
+            Image = ImageType.exam;
+            LinkTitel = "فایل پیوست";
+            ClearNull();
+        }
+
         public ContentItem(Resources a, string LessonName)
         {
             Titel = a.Title;

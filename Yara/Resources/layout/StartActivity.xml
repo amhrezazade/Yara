@@ -8,6 +8,15 @@
     android:background="@android:color/black"
     android:minHeight="25px"
     android:gravity="center">
+
+        <TextView
+        android:text="در حال آماده سازی ..."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:textColor="#ffcc00"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+
     <ImageView
         android:minWidth="25px"
         android:minHeight="25px"
@@ -18,5 +27,6 @@
         android:src="@drawable/logo" 
 
     />
+
 
 </LinearLayout>

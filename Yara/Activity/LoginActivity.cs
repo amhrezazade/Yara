@@ -40,16 +40,34 @@ namespace Yara.Activity
             btn.Visibility = ViewStates.Invisible;
             await Task.Delay(100);
 
-            string res = await App.Login(txtUsername.Text, txtPassword.Text);
 
-            if (res != "OK")
+            LoginModel model = new LoginModel()
             {
-                lblinfo.Text = res;
+                username = txtUsername.Text,
+                password = txtPassword.Text,
+                userTypeID = 1
+            };
+
+            if (model.username.Length < 8 || model.password.Length < 8)
+            {
+                lblinfo.Text = "نام کاربری و رمز عبور نباید از 8 کاراکتر کمتر باشند";
                 btn.Visibility = ViewStates.Visible;
                 return;
             }
-            await App.RefreshData();
-            StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+
+            var authResult = await Api.Login(model);
+
+            if (!authResult.OK)
+            {
+                lblinfo.Text = authResult.Message;
+                btn.Visibility = ViewStates.Visible;
+                return;
+            }
+
+            await db.SaveToken(authResult.data);
+
+
+            StartActivity(new Intent(Application.Context, typeof(splash)));
             Finish();
 
         }

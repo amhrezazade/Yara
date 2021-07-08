@@ -19,7 +19,7 @@ namespace Yara.Service
     public static class db
     {
         private static string localFileName = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "data.dat");
-
+        private static string token = "";
         public static async Task<appData> LoadAsync()
         {
             try 
@@ -66,7 +66,10 @@ namespace Yara.Service
         {
             try
             {
-                return await File.ReadAllTextAsync(localFileName + "a");
+                if (token == string.Empty)
+                    return await File.ReadAllTextAsync(localFileName + "a");
+                else
+                    return token;
             }
             catch //(Exception ex)
             {
@@ -78,6 +81,7 @@ namespace Yara.Service
         {
             try
             {
+                token = data;
                 await File.WriteAllTextAsync(localFileName + "a", data);
 
             }

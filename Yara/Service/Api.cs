@@ -70,11 +70,14 @@ namespace Yara.Service
         public static async Task<ApiResult<Announces[]>> GetAnnounces(int LessonId) =>
             await GetObject<Announces[]>("/api/announces/actives/" + LessonId.ToString());
 
-        public static async Task<ApiResult<Yara.Models.apiModels.Resources[]>> GetResources(int LessonId) =>
-            await GetObject<Yara.Models.apiModels.Resources[]>("/api/resources/actives/" + LessonId.ToString());
+        public static async Task<ApiResult<Resources[]>> GetResources(int LessonId) =>
+            await GetObject<Resources[]>("/api/resources/actives/" + LessonId.ToString());
 
         public static async Task<ApiResult<Practices[]>> GetPractices(int LessonId) =>
             await GetObject<Practices[]>("/api/practices/actives/" + LessonId.ToString());
+
+        public static async Task<ApiResult<Exam[]>> GetExams(int LessonId) =>
+            await GetObject<Exam[]>("/api/exams/actives/" + LessonId.ToString());
 
         public static async Task<ApiResult<LessonInfo>> GetLessonInfo(int LessonId) =>
             await GetObject<LessonInfo>("/api/lessons/groupInfo/" + LessonId.ToString());

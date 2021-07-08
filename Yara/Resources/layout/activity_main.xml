@@ -205,6 +205,62 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+
+                    
+                    <!--Notif Card-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circularbordersolid"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:padding="16dp"
+                        android:minWidth="25px"
+                        android:minHeight="25px"
+                        android:id="@+id/NotifCardLinearLayout">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#0066cc"
+                                android:text="رویداد های فعلی"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:id="@+id/linearLayout2">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="20sp"
+                                    android:textColor="#e6ffff"
+                                    android:text="5 مورد"
+                                    android:id="@+id/tvtoday" />
+                                <Space
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+                                <Button
+                                    android:background="@drawable/button_desgin"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                    android:text="نمایش"
+                                    android:textColor="#e6ffff"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/btshowtoday" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--End Card-->
+
+
                     <!--Practices Card-->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -227,8 +283,7 @@
                                 android:textColor="#0066cc"
                                 android:text="تمارین"
                                 android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:id="@+id/textView2" />
+                                android:textStyle="bold" />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -261,7 +316,7 @@
                     <!--End Card-->
 
 
-                     <!--Practices Card-->
+                     <!--Annotation Card-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -304,6 +359,59 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/btannouncesshow" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--End Card-->
+
+                     <!--Notif Card-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circularbordersolid"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:padding="16dp"
+                        android:minWidth="25px"
+                        android:minHeight="25px"
+                        android:id="@+id/NotifCardLinearLayout">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#0066cc"
+                                android:text="آزمون ها"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:id="@+id/linearLayout2">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="20sp"
+                                    android:textColor="#e6ffff"
+                                    android:text="5 مورد"
+                                    android:id="@+id/tvexam" />
+                                <Space
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+                                <Button
+                                    android:background="@drawable/button_desgin"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                    android:text="نمایش"
+                                    android:textColor="#e6ffff"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/btshowexam" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>

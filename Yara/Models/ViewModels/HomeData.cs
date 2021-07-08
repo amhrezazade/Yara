@@ -19,6 +19,8 @@ namespace Yara.Models.ViewModels
         public string practicesText { set; get; }
         public string announcesText { set; get; }
         public string resourcesText { set; get; }
+        public string examText { get; set; }
         public string activeterm { get; set; }
+        public string todayText { get; set; }
     }
 }

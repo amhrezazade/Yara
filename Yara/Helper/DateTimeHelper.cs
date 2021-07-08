@@ -107,7 +107,7 @@ namespace Yara.Helper
 
         public string ToString(char del)
         {
-            return h.ToString() + del + m.ToString();
+            return h.ToString() + " " +  del + " " + m.ToString();
         }
 
     }

@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <MandroidI18n />
     <AndroidDexTool>d8</AndroidDexTool>
     <Debugger>Xamarin</Debugger>
@@ -65,10 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity\AnnouncesActivity.cs" />
+    <Compile Include="Activity\ExamActivity.cs" />
     <Compile Include="Activity\LoginActivity.cs" />
     <Compile Include="Activity\PracticesActivity.cs" />
     <Compile Include="Activity\ResourceActivity.cs" />
     <Compile Include="Activity\splash.cs" />
+    <Compile Include="Activity\TodayActivity.cs" />
     <Compile Include="Adapters\ContentItemAdapter.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Models\apiModels\ActiveTermId.cs" />

@@ -33,7 +33,6 @@ namespace Yara.Service
         {
             try
             {
-
                 WebClient client = new WebClient();
                 string token;
                 if (UserToken == null)
@@ -148,6 +147,7 @@ namespace Yara.Service
                 var request = (HttpWebRequest)WebRequest.Create(StaticData.BaseUrl + rout);
                 request.Headers.Add("x-auth-token", await db.LoadToken());
                 request.Method = "PUT";
+                request.Timeout = 30000;
                 request.ContentLength = 0;
                 request.Host = StaticData.ServerHost;
                 await request.GetResponseAsync();

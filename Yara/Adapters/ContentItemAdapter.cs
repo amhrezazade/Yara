@@ -96,7 +96,7 @@ namespace Yara.Adapters
                 vh.btLink.Text = item.LinkTitel;
                 vh.btLink.Click += async (s, e) =>
                 {
-                    await App.ItemClick(item.Link);
+                    await Browser.OpenAsync(item.Link, BrowserLaunchMode.SystemPreferred);
                 };
             }
 
@@ -144,6 +144,10 @@ namespace Yara.Adapters
                 case Models.ImageType.Subject:
                     vh.ivImage.Visibility = ViewStates.Visible;
                     vh.ivImage.SetImageResource(Resource.Drawable.ic_subject);
+                    break;
+                case Models.ImageType.exam:
+                    vh.ivImage.Visibility = ViewStates.Visible;
+                    vh.ivImage.SetImageResource(Resource.Drawable.ic_exam);
                     break;
                 default:
                     vh.ivImage.Visibility = ViewStates.Invisible;

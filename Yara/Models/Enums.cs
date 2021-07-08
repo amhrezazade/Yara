@@ -19,7 +19,8 @@ namespace Yara.Models
         Subject,
         Person,
         Cloud,
-        None
+        None,
+        exam
 
 
     }
