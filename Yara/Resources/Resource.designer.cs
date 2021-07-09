@@ -6825,23 +6825,23 @@ namespace Yara
 			// aapt resource value: 0x7F0801B8
 			public const int triangle = 2131231160;
 			
-			// aapt resource value: 0x7F0801BE
-			public const int tvactiveterm = 2131231166;
-			
 			// aapt resource value: 0x7F0801BF
-			public const int tvannouncescaption = 2131231167;
+			public const int tvactiveterm = 2131231167;
+			
+			// aapt resource value: 0x7F0801C0
+			public const int tvannouncescaption = 2131231168;
 			
 			// aapt resource value: 0x7F0801B9
 			public const int tvDateTime = 2131231161;
 			
-			// aapt resource value: 0x7F0801C0
-			public const int tvdefinerContentItem = 2131231168;
+			// aapt resource value: 0x7F0801C1
+			public const int tvdefinerContentItem = 2131231169;
 			
 			// aapt resource value: 0x7F0801BA
 			public const int tvDesContent = 2131231162;
 			
-			// aapt resource value: 0x7F0801C1
-			public const int tvexam = 2131231169;
+			// aapt resource value: 0x7F0801C2
+			public const int tvexam = 2131231170;
 			
 			// aapt resource value: 0x7F0801BB
 			public const int tvNote1 = 2131231163;
@@ -6849,74 +6849,77 @@ namespace Yara
 			// aapt resource value: 0x7F0801BC
 			public const int tvNote2 = 2131231164;
 			
-			// aapt resource value: 0x7F0801C2
-			public const int tvpracticescaption = 2131231170;
-			
 			// aapt resource value: 0x7F0801C3
-			public const int tvresourcescaption = 2131231171;
+			public const int tvpracticescaption = 2131231171;
 			
 			// aapt resource value: 0x7F0801C4
-			public const int tvstudentcode = 2131231172;
+			public const int tvresourcescaption = 2131231172;
 			
 			// aapt resource value: 0x7F0801C5
-			public const int tvstudentid = 2131231173;
+			public const int tvstudentcode = 2131231173;
 			
 			// aapt resource value: 0x7F0801C6
-			public const int tvstudentname = 2131231174;
-			
-			// aapt resource value: 0x7F0801BD
-			public const int tvTitleContent = 2131231165;
+			public const int tvstudentid = 2131231174;
 			
 			// aapt resource value: 0x7F0801C7
-			public const int tvtoday = 2131231175;
+			public const int tvstudentname = 2131231175;
+			
+			// aapt resource value: 0x7F0801BD
+			public const int tvTitel = 2131231165;
+			
+			// aapt resource value: 0x7F0801BE
+			public const int tvTitleContent = 2131231166;
 			
 			// aapt resource value: 0x7F0801C8
-			public const int @unchecked = 2131231176;
+			public const int tvtoday = 2131231176;
 			
 			// aapt resource value: 0x7F0801C9
-			public const int uniform = 2131231177;
+			public const int @unchecked = 2131231177;
 			
 			// aapt resource value: 0x7F0801CA
-			public const int unlabeled = 2131231178;
+			public const int uniform = 2131231178;
 			
 			// aapt resource value: 0x7F0801CB
-			public const int up = 2131231179;
+			public const int unlabeled = 2131231179;
 			
 			// aapt resource value: 0x7F0801CC
-			public const int useLogo = 2131231180;
+			public const int up = 2131231180;
 			
 			// aapt resource value: 0x7F0801CD
-			public const int view_offset_helper = 2131231181;
+			public const int useLogo = 2131231181;
 			
 			// aapt resource value: 0x7F0801CE
-			public const int view_tree_lifecycle_owner = 2131231182;
+			public const int view_offset_helper = 2131231182;
 			
 			// aapt resource value: 0x7F0801CF
-			public const int view_tree_saved_state_registry_owner = 2131231183;
+			public const int view_tree_lifecycle_owner = 2131231183;
 			
 			// aapt resource value: 0x7F0801D0
-			public const int view_tree_view_model_store_owner = 2131231184;
+			public const int view_tree_saved_state_registry_owner = 2131231184;
 			
 			// aapt resource value: 0x7F0801D1
-			public const int visible = 2131231185;
+			public const int view_tree_view_model_store_owner = 2131231185;
 			
 			// aapt resource value: 0x7F0801D2
-			public const int visible_removing_fragment_view_tag = 2131231186;
-			
-			// aapt resource value: 0x7F0801D4
-			public const int withinBounds = 2131231188;
+			public const int visible = 2131231186;
 			
 			// aapt resource value: 0x7F0801D3
-			public const int withText = 2131231187;
+			public const int visible_removing_fragment_view_tag = 2131231187;
 			
 			// aapt resource value: 0x7F0801D5
-			public const int wrap = 2131231189;
+			public const int withinBounds = 2131231189;
+			
+			// aapt resource value: 0x7F0801D4
+			public const int withText = 2131231188;
 			
 			// aapt resource value: 0x7F0801D6
-			public const int wrap_content = 2131231190;
+			public const int wrap = 2131231190;
 			
 			// aapt resource value: 0x7F0801D7
-			public const int zero_corner_chip = 2131231191;
+			public const int wrap_content = 2131231191;
+			
+			// aapt resource value: 0x7F0801D8
+			public const int zero_corner_chip = 2131231192;
 			
 			static Id()
 			{

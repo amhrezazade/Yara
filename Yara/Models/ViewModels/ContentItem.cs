@@ -39,7 +39,10 @@ namespace Yara.Models.ViewModels
             if (p.FileName == string.Empty)
                 Link = "";
             else
-                Link = StaticData.DownloadpracticesURL + p.FileName;
+                Link = StaticData.DownloadpracticesURL +
+                    p.FileName +
+                    "?token=" +
+                    General.GenerateToken(p.FileName);
             Image = ImageType.Note;
             LinkTitel = "فایل پیوست";
             ClearNull();
@@ -59,7 +62,6 @@ namespace Yara.Models.ViewModels
             ClearNull();
         }
 
- 
 
         public ContentItem(Announces a, string LessonName)
         {
@@ -81,7 +83,10 @@ namespace Yara.Models.ViewModels
             if (a.FileName == string.Empty)
                 Link = "";
             else
-                Link = StaticData.DownloadannouncesURL + a.FileName;
+                Link = StaticData.DownloadannouncesURL +
+                    a.FileName +
+                    "?token=" +
+                    General.GenerateToken(a.FileName);
             LinkTitel = "فایل پیوست";
             Image = ImageType.Motif;
             ClearNull();
@@ -146,7 +151,10 @@ namespace Yara.Models.ViewModels
             if (a.FileName == string.Empty)
                 Link = "";
             else
-                Link = StaticData.DownloadannouncesURL + a.FileName;
+                Link = StaticData.DownloadresourcesURL +
+                    a.FileName +
+                    "?token=" +
+                    General.GenerateToken(a.FileName);
             LinkTitel = "فایل پیوست";
             Image = ImageType.Cloud;
             ClearNull();

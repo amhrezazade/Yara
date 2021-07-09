@@ -14,14 +14,16 @@ using System.Collections.Generic;
 using Yara.Models.ViewModels;
 using Yara.Service;
 using Android.Content;
+using Yara.Helper;
 using System.Threading.Tasks;
+using System;
 
 namespace Yara.Activity
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
     public class MainActivity : AppCompatActivity
     {
-
+        DateTime LastUpdate;
         private async void LoadImage()
         {
             var iv = FindViewById<ImageView>(Resource.Id.ivprofileimage);
@@ -37,8 +39,9 @@ namespace Yara.Activity
         
         private void fillText()
         {
-            
+
             var data = db.Load().Home;
+            LastUpdate = DateTime.Parse(data.LastUpdate);
             FindViewById<TextView>(Resource.Id.tvstudentname).Text = data.Name;
             FindViewById<TextView>(Resource.Id.tvstudentcode).Text = data.StudentCode;
             FindViewById<TextView>(Resource.Id.tvpracticescaption).Text = data.practicesText;
@@ -48,7 +51,7 @@ namespace Yara.Activity
             FindViewById<TextView>(Resource.Id.tvresourcescaption).Text = data.resourcesText;
             FindViewById<TextView>(Resource.Id.tvexam).Text = data.examText;
             FindViewById<TextView>(Resource.Id.tvtoday).Text = data.todayText;
-
+            
         }
         
         private void setClickvent()
@@ -85,6 +88,19 @@ namespace Yara.Activity
             Task startupWork = new Task(() => { LoadImage(); });
             startupWork.Start();
         }
+
+        protected override void OnResume()
+        {
+            FindViewById<TextView>(Resource.Id.tvTitel).Text =
+                DateTimeHelper.GetDateStringEx() +
+                "\r\n" +
+                " اخرین به روز رسانی : " +
+                DateTimeHelper.GetDateString(LastUpdate);
+
+             
+            base.OnResume();
+        }
+
     }
 
 }

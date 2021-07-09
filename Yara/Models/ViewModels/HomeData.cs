@@ -22,5 +22,6 @@ namespace Yara.Models.ViewModels
         public string examText { get; set; }
         public string activeterm { get; set; }
         public string todayText { get; set; }
+        public string LastUpdate { set; get; }
     }
 }

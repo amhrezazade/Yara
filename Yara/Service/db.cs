@@ -62,12 +62,27 @@ namespace Yara.Service
             }
         }
 
-        public static async Task<string> LoadToken()
+        public static async Task<string> LoadTokenAsync()
         {
             try
             {
                 if (token == string.Empty)
                     return await File.ReadAllTextAsync(localFileName + "a");
+                else
+                    return token;
+            }
+            catch //(Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static string LoadToken()
+        {
+            try
+            {
+                if (token == string.Empty)
+                    return File.ReadAllText(localFileName + "a");
                 else
                     return token;
             }

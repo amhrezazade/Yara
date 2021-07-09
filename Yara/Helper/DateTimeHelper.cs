@@ -18,6 +18,13 @@ namespace Yara.Helper
         public int m { set; get; }
         public int d { set; get; }
 
+        public Date(int Y, int M, int D)
+        {
+            y = Y;
+            m = M;
+            d = D;
+        }
+
         public Date(string date)
         {
             string t = "";
@@ -105,8 +112,10 @@ namespace Yara.Helper
             return output;
         }
 
-        public string ToString(char del)
+        public string ToString(char del, bool Reverse = false)
         {
+            if(Reverse)
+                return m.ToString() + " " + del + " " + h.ToString();
             return h.ToString() + " " +  del + " " + m.ToString();
         }
 
@@ -146,7 +155,7 @@ namespace Yara.Helper
 
 
         }
-        private static string DateEx(string stringdate)
+        private static string DateEx(string stringdate,string time)
         {
             DateTime date = CommonExtensions.ConvertJalaliToMiladi(new Date(stringdate).ToString('-'));
             DateTime now = DateTime.Now;
@@ -174,7 +183,32 @@ namespace Yara.Helper
             if (dd == -1)
                 return "دیروز";
             else if (dd == 0)
-                return "امروز";
+            {
+                Time t = new Time(time);
+
+                int h = t.h - now.Hour;
+                int m = t.m - now.Minute;
+
+                if (h < 0)
+                {
+                    h = -h;
+                    return num(h) + " ساعت قبل ";
+                }
+
+                if (h > 0)
+                    return num(h) + " ساعت بعد ";
+
+                if (m < 0)
+                {
+                    m = -m;
+                    return num(m) + " دقیقه قبل ";
+                }
+
+                if (m > 0)
+                    return num(h) + " دقیقه بعد ";
+
+                return "چند لحظه پیش";
+            }    
             else if (dd == 1)
                 return "فردا";
                 
@@ -197,8 +231,42 @@ namespace Yara.Helper
 
         public static string GetDateString(string date, string time)
         {
-            string output =  new Date(date).ToString('/') + " ( " + DateEx(date) + " )  ,  " + new Time(time).ToString(':');
+            string output =  new Date(date).ToString('/') + " ( " + DateEx(date,time) + " )  ,  " + new Time(time).ToString(':', true);
             return CommonExtensions.ToPersianNumber(output);
         }
+
+        public static string GetDateString()
+        {
+            var now = DateTime.Now;
+
+            string date = CommonExtensions.ConvertMiladiToJalali(now).ToString();
+            string time = new Time(now).ToString();
+
+            string output = new Date(date).ToString('/') + " ( " + DateEx(date, time) + " )  ,  " + new Time(time).ToString(':', true);
+            return CommonExtensions.ToPersianNumber(output);
+        }
+
+        public static string GetDateString(DateTime t)
+        {
+            var now = t;
+
+            string date = CommonExtensions.ConvertMiladiToJalali(now).ToString();
+            string time = new Time(now).ToString();
+
+            string output = new Date(date).ToString('/') + " ( " + DateEx(date, time) + " )  ,  " + new Time(time).ToString(':', true);
+            return CommonExtensions.ToPersianNumber(output);
+        }
+
+        public static string GetDateStringEx()
+        {
+            var now = DateTime.Now;
+
+            string date = CommonExtensions.ConvertMiladiToJalali(now).ToString();
+            string time = new Time(now).ToString();
+
+            string output = new Date(date).ToString('/') + "  ,  " + new Time(time).ToString(':');
+            return CommonExtensions.ToPersianNumber(output);
+        }
+
     }
 }

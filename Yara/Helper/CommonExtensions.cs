@@ -165,10 +165,17 @@ namespace Yara.Helper
             return showTime ? $"{year}/{monthStr}/{dayStr} {hour}:{minute}:{second}" : $"{year}/{monthStr}/{dayStr}";
         }
 
-        public static string ConvertMiladiToJalali(this DateTime date)
+        public static Date ConvertMiladiToJalali(this DateTime date)
         {
-            return ConvertMiladiToJalali(date, false);
+            PersianCalendar p = new PersianCalendar();
+            int y, m, d;
+            y = p.GetYear(date);
+            m = p.GetMonth(date);
+            d = p.GetDayOfMonth(date);
+            return new Date(y, m, d);
         }
+
+
 
         public static string ConvertMiladiToJalali(this DateTime? date)
         {

@@ -73,6 +73,7 @@
     <Compile Include="Activity\TodayActivity.cs" />
     <Compile Include="Adapters\ContentItemAdapter.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
+    <Compile Include="Helper\General.cs" />
     <Compile Include="Models\apiModels\ActiveTermId.cs" />
     <Compile Include="Models\apiModels\Announces.cs" />
     <Compile Include="Models\apiModels\Answer.cs" />
@@ -141,6 +142,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="JWT">
+      <Version>8.2.2</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>

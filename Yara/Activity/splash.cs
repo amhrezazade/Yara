@@ -9,7 +9,8 @@ using System.Collections.Generic;
 using Yara.Models;
 using Yara.Models.apiModels;
 using Yara.Models.ViewModels;
-
+using System;
+using Yara.Helper;
 
 namespace Yara.Activity
 {
@@ -50,11 +51,17 @@ namespace Yara.Activity
                     return;
                 case Server.TestApiResult.NetworkError:
                     t.Text = "خطای اتصال به شبکه";
+                    await Task.Delay(1000);
+                    StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+                    Finish();
                     return ;
                 case Server.TestApiResult.OK:
                     break;
                 default:
                     t.Text = "خطا ";
+                    await Task.Delay(1000);
+                    StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+                    Finish();
                     return;
             }
 
@@ -99,7 +106,13 @@ namespace Yara.Activity
                 var ResourcesRes = await Api.GetResources(l.GroupID);
                 var ExamRes = await Api.GetExams(l.GroupID);
 
-                var titel = new NotificationItem(l.LessonTitle, LessonInfoRes.data.LecturerLastName);
+                var titel = new NotificationItem
+                    (
+                        l.LessonTitle + " " + l.GroupID.ToString(),
+                        LessonInfoRes.data.LecturerFirstName + " " +
+                        LessonInfoRes.data.LecturerLastName + " - " +
+                        LessonInfoRes.data.EduGroupTitle
+                    );
 
                 if (AnnouncesRes.data.Length > 0)
                 {
@@ -181,6 +194,7 @@ namespace Yara.Activity
             data.Home.announcesText = announcesCount.ToString() + " اعلان جدید  ";
             data.Home.resourcesText = ResourcesCount.ToString() + " منبع ";
             data.Home.examText = examcount.ToString() + " آزمون ";
+            data.Home.LastUpdate = DateTime.Now.ToString();
 
             await db.Save(data);
 

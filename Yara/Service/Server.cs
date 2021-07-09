@@ -37,7 +37,7 @@ namespace Yara.Service
                 string token;
                 if (UserToken == null)
                 {
-                    var data = await db.LoadToken();
+                    var data = await db.LoadTokenAsync();
                     if (data == null)
                         token = "";
                     else
@@ -115,7 +115,7 @@ namespace Yara.Service
 
         public static async Task<TestApiResult> Test()
         {
-            var data = await db.LoadToken();
+            var data = await db.LoadTokenAsync();
             if (data == null)
                 return TestApiResult.DataNull;
             string url = "/api/lessons/activeTerm";
@@ -145,7 +145,7 @@ namespace Yara.Service
             try
             {
                 var request = (HttpWebRequest)WebRequest.Create(StaticData.BaseUrl + rout);
-                request.Headers.Add("x-auth-token", await db.LoadToken());
+                request.Headers.Add("x-auth-token", await db.LoadTokenAsync());
                 request.Method = "PUT";
                 request.Timeout = 30000;
                 request.ContentLength = 0;
