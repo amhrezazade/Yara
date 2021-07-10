@@ -194,6 +194,49 @@ namespace Yara.Models.ViewModels
             ClearNull();
         }
 
+
+        public ContentItem(Ticket t , string myname,string tname)
+        {
+            if (t.ReceiverMemberType == 1)
+            {
+                Titel = tname;
+                Image = ImageType.mail;
+            }
+            else
+            {
+                Image = ImageType.Profile;
+                Titel = myname;
+            }
+                
+
+            Caption = t.Message;
+
+            date = DateTimeHelper.GetDateString(t.RegDate, t.RegTime);
+
+            if (t.SeenDate == null)
+            {
+                GreenNote = string.Empty;
+                RedNote = "جدید";
+            }
+            else
+            {
+                GreenNote = "دیده شده در ";
+                RedNote = DateTimeHelper.GetDateString(t.SeenDate, t.SeenTime);
+            }
+
+            Def = t.TicketID.ToString();
+
+            if (t.FileName == string.Empty)
+                Link = "";
+            else
+                Link = StaticData.DownloadresourcesURL +
+                    t.FileName +
+                    "?token=" +
+                    General.GenerateToken(t.FileName);
+
+            LinkTitel = "فایل پیوست";
+        }
+
         public ContentItem()
         {
             Titel = string.Empty;

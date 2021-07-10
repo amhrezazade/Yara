@@ -67,6 +67,7 @@
     <Compile Include="Activity\AnnouncesActivity.cs" />
     <Compile Include="Activity\ExamActivity.cs" />
     <Compile Include="Activity\LoginActivity.cs" />
+    <Compile Include="Activity\MessageActivity.cs" />
     <Compile Include="Activity\PracticesActivity.cs" />
     <Compile Include="Activity\ResourceActivity.cs" />
     <Compile Include="Activity\splash.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Models\apiModels\Exam.cs" />
     <Compile Include="Models\apiModels\LessonInfo.cs" />
     <Compile Include="Models\apiModels\Member.cs" />
+    <Compile Include="Models\apiModels\Ticket.cs" />
     <Compile Include="Models\apiModels\Practices.cs" />
     <Compile Include="Models\apiModels\Resource.cs" />
     <Compile Include="Models\apiModels\Teacher.cs" />
@@ -306,6 +308,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_exam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_mail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

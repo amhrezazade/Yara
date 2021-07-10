@@ -20,6 +20,7 @@ namespace Yara.Models
         Person,
         Cloud,
         None,
+        mail,
         exam
 
 

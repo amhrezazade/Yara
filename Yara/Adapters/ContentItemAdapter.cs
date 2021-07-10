@@ -14,6 +14,12 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Yara.Models.ViewModels;
 using Yara.Service;
+using Android.Support.Design.Widget;
+using Android.Support.V7.App;
+using AndroidX.CardView.Widget;
+using AndroidX.AppCompat.View.Menu;
+using Yara.Adapters;
+using Yara.Activity;
 
 namespace Yara.Adapters
 {
@@ -139,6 +145,13 @@ namespace Yara.Adapters
                     break;
                 case Models.ImageType.Person:
                     vh.ivImage.Visibility = ViewStates.Visible;
+                    vh.Item.Click += async (s, e) =>
+                    {
+                        var co = Application.Context;
+                        var intent = new Intent(co, typeof(MessageActivity));
+                        intent.PutExtra("arg", item.Def);
+                        co.StartActivity(intent);
+                    };
                     vh.ivImage.SetImageResource(Resource.Drawable.ic_baseline_person_24);
                     break;
                 case Models.ImageType.Subject:
@@ -148,6 +161,10 @@ namespace Yara.Adapters
                 case Models.ImageType.exam:
                     vh.ivImage.Visibility = ViewStates.Visible;
                     vh.ivImage.SetImageResource(Resource.Drawable.ic_exam);
+                    break;
+                case Models.ImageType.mail:
+                    vh.ivImage.Visibility = ViewStates.Visible;
+                    vh.ivImage.SetImageResource(Resource.Drawable.ic_mail);
                     break;
                 case Models.ImageType.Profile:
                     vh.ivImage.Visibility = ViewStates.Visible;
