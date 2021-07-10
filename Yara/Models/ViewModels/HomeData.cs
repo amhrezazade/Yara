@@ -13,6 +13,7 @@ namespace Yara.Models.ViewModels
 {
     public class HomeData
     {
+        public string[] Terms { set; get; }
         public string Name { set; get; }
         public string StudentCode { set; get; }
         public string StudentId { set; get; }

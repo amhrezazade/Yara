@@ -84,12 +84,22 @@ namespace Yara.Activity
             data.Home.activeterm = ActiveTerm.ToString();
             Lesson[] Lessons = null;
 
+            List<string> TermsList = new List<string>();
+
             foreach (var term in TermListRes.data)
+                TermsList.Add(term.Term.ToString());
+
+            data.Home.Terms = TermsList.ToArray();
+
+            foreach (var term in TermListRes.data)
+            {
                 if (term.Term == ActiveTerm)
                 {
                     Lessons = term.Lessons;
                     break;
                 }
+            }
+
 
 
             NotifCollector notif = new NotifCollector();

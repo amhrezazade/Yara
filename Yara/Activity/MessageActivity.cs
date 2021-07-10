@@ -36,7 +36,11 @@ namespace Yara.Activity
             string arg = Intent.GetStringExtra("arg");
             var tRes = await Api.GetTickets(arg);
             if (tRes.data == null)
+            {
                 Finish();
+                return;
+            }
+                
 
             var myname = data.Home.Name;
             var teachername = data.Teachers.Find(x => x.Def == arg).Titel;

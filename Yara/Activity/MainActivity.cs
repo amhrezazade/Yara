@@ -5,7 +5,6 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-
 using AndroidX.CardView.Widget;
 using AndroidX.AppCompat.View.Menu;
 using AndroidX.RecyclerView.Widget;
@@ -17,6 +16,7 @@ using Android.Content;
 using Yara.Helper;
 using System.Threading.Tasks;
 using System;
+using AndroidX.AppCompat.Widget;
 
 namespace Yara.Activity
 {
@@ -37,25 +37,23 @@ namespace Yara.Activity
             }
         }
         
-        private void fillText()
+        
+        private void setup()
         {
-
             var data = db.Load().Home;
             LastUpdate = DateTime.Parse(data.LastUpdate);
             FindViewById<TextView>(Resource.Id.tvstudentname).Text = data.Name;
             FindViewById<TextView>(Resource.Id.tvstudentcode).Text = data.StudentCode;
             FindViewById<TextView>(Resource.Id.tvpracticescaption).Text = data.practicesText;
             FindViewById<TextView>(Resource.Id.tvstudentid).Text = data.StudentId;
-            FindViewById<TextView>(Resource.Id.tvactiveterm).Text = data.activeterm;
             FindViewById<TextView>(Resource.Id.tvannouncescaption).Text = data.announcesText;
             FindViewById<TextView>(Resource.Id.tvresourcescaption).Text = data.resourcesText;
             FindViewById<TextView>(Resource.Id.tvexam).Text = data.examText;
             FindViewById<TextView>(Resource.Id.tvtoday).Text = data.todayText;
             FindViewById<TextView>(Resource.Id.tvteacher).Text = data.ChatText;
-        }
-        
-        private void setClickvent()
-        {
+            FindViewById<TextView>(Resource.Id.tvactiveterm).Text = data.activeterm;
+
+
             FindViewById<Button>(Resource.Id.btshowpractice).Click += (s, e) =>
             {
                 StartActivity(new Intent(Application.Context, typeof(PracticesActivity)));
@@ -87,8 +85,7 @@ namespace Yara.Activity
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
-            fillText();
-            setClickvent();
+            setup();
             Task startupWork = new Task(() => { LoadImage(); });
             startupWork.Start();
         }
