@@ -119,7 +119,7 @@ namespace Yara.Service
             }
         }
 
-        public static async Task<Bitmap> LoadProfileImage()
+        public static async Task<Bitmap> LoadProfileImageAsync()
         {
             try
             {
@@ -133,6 +133,18 @@ namespace Yara.Service
         }
 
 
+        public static Bitmap LoadProfileImage()
+        {
+            try
+            {
+                var bytes = File.ReadAllBytes(localFileName + ".jpg");
+                return BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length);
+            }
+            catch //(Exception ex)
+            {
+                return null;
+            }
+        }
 
         public static void clearData()
         {

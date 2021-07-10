@@ -101,7 +101,7 @@
                             android:textColor="#ff6600"
                             android:textSize="14sp"
                             android:id="@+id/tvstudentcode" />
-
+                        
 
                     </LinearLayout>
 
@@ -365,6 +365,56 @@
                     </LinearLayout>
                     <!--End Card-->
 
+
+                     <!--Chat Card-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circularbordersolid"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:padding="16dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#0066cc"
+                                android:text="چت"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:textSize="20sp"
+                                    android:textColor="#e6ffff"
+                                    android:text=" 0 پیام"
+                                    android:id="@+id/tvteacher" />
+                                <Space
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+                                <Button
+                                    android:background="@drawable/button_desgin"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                    android:text="نمایش"
+                                    android:textColor="#e6ffff"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/btshowteacher" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--End Card-->
+
+
                      <!--Notif Card-->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -374,8 +424,7 @@
                         android:layout_marginTop="10dp"
                         android:padding="16dp"
                         android:minWidth="25px"
-                        android:minHeight="25px"
-                        android:id="@+id/NotifCardLinearLayout">
+                        android:minHeight="25px">
 
                         <LinearLayout
                             android:layout_width="match_parent"

@@ -11,6 +11,14 @@ using System.Text;
 
 namespace Yara.Helper
 {
+    public enum DayType
+    {
+        yesterday,
+        today,
+        tomorrow,
+        nexttomorrow,
+        none
+    }
 
     public class Date
     {
@@ -123,7 +131,7 @@ namespace Yara.Helper
     public static class DateTimeHelper
     {
 
-        private static string num(int n)
+        public static string num(int n)
         {
             switch (n)
             {
@@ -152,8 +160,6 @@ namespace Yara.Helper
             }
 
             return n.ToString();
-
-
         }
         private static string DateEx(string stringdate,string time)
         {
@@ -228,10 +234,32 @@ namespace Yara.Helper
 
         }
 
+        public static DayType GetDayType(string stringdate)
+        {
+            DateTime date = CommonExtensions.ConvertJalaliToMiladi(new Date(stringdate).ToString('-'));
+            DateTime now = DateTime.Now;
+            TimeSpan res = date - now;
+
+            int dd = res.Days;
+
+            if (dd == -1)
+                return DayType.yesterday;
+            else if (dd == 0)
+                return DayType.today;
+            else if (dd == 1)
+                return DayType.tomorrow;
+            else if (dd == 2)
+                return DayType.nexttomorrow;
+
+            return DayType.none;
+
+        }
+
 
         public static string GetDateString(string date, string time)
         {
-            string output =  new Date(date).ToString('/') + " ( " + DateEx(date,time) + " )  ,  " + new Time(time).ToString(':', true);
+            //string output = " ⏰ " +  new Date(date).ToString('/') + " ( " + DateEx(date,time) + " )\r\n 📆 " + new Time(time).ToString(':', true);
+            string output = " 📆 " + new Date(date).ToString('/') + " ( " + DateEx(date,time) + " )  ⏰  " + new Time(time).ToString(':', true);
             return CommonExtensions.ToPersianNumber(output);
         }
 

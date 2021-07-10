@@ -15,9 +15,7 @@ namespace Yara.Models
 {
     public class appData
     {
-        //public UserData user { set; get; } 
-        //public int Activeterm { set; get; } 
-        //public List<LessonItem> Lessons { set; get; }
+
         public HomeData Home { set; get; } = new HomeData();
         public List<ContentItem> Announces { set; get; } = new List<ContentItem>();
         public List<ContentItem> Exams { set; get; } = new List<ContentItem>(); 

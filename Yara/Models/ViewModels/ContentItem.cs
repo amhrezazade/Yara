@@ -102,7 +102,7 @@ namespace Yara.Models.ViewModels
 
             if (e.StudentScore != null && e.TotalScore != null)
                 Caption += "\r\n" +
-                    " 🔘نمره شما : " + e.StudentScore.Value.ToString() + " از " + e.TotalScore.Value.ToString();
+                    " نمره شما : " + e.StudentScore.Value.ToString() + " از " + e.TotalScore.Value.ToString();
 
             Caption += "\r\n" +
                 +e.AnsweredQuestionsCount + " سوال پاسخ داده شده از  " + e.QuestionsCount;
@@ -160,6 +160,39 @@ namespace Yara.Models.ViewModels
             ClearNull();
         }
 
+        public ContentItem(Teacher t,LessonInfo i,Lesson l)
+        {
+            Titel = i.LecturerFirstName +
+                " " +
+                i.LecturerLastName +
+                " " +
+                t.MemberID.ToString();
+
+            Caption = l.LessonTitle +
+                " - " +
+                i.EduGroupTitle + " شماره " +
+                l.GroupID.ToString();
+
+            Image = ImageType.Person;
+
+            if (t.UnseenMessagesCount == 0)
+                GreenNote = "پیام جدیدی نیست";
+            else
+            {
+                GreenNote = DateTimeHelper.num(t.UnseenMessagesCount) + " پیام ناخوانده ";
+                GreenNote = CommonExtensions.ToPersianNumber(GreenNote);
+            }
+
+            Def = l.GroupID.ToString() +
+                "/2/" +
+                t.MemberID.ToString();
+
+            RedNote = string.Empty;
+            date = string.Empty;
+            Link = string.Empty;
+            LinkTitel = string.Empty;
+            ClearNull();
+        }
 
         public ContentItem()
         {
@@ -187,6 +220,6 @@ namespace Yara.Models.ViewModels
         }
 
         public string getShareText() =>
-            Titel + "\r\n\r\n" + Caption + "\r\n" + Link;
+            "🧷" + Titel + " " + Def + "\r\n\r\n🛑" + Caption + "\r\n" + Link;
     }
 }

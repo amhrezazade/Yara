@@ -81,5 +81,8 @@ namespace Yara.Service
 
         public static async Task<ApiResult<LessonInfo>> GetLessonInfo(int LessonId) =>
             await GetObject<LessonInfo>("/api/lessons/groupInfo/" + LessonId.ToString());
+
+        public static async Task<ApiResult<Teacher[]>> GetTeachers(int LessonId) =>
+            await GetObject<Teacher[]>("/api/tickets/audiences/" + LessonId.ToString());
     }
 }

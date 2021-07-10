@@ -70,10 +70,12 @@
     <Compile Include="Activity\PracticesActivity.cs" />
     <Compile Include="Activity\ResourceActivity.cs" />
     <Compile Include="Activity\splash.cs" />
+    <Compile Include="Activity\TeacherActivity.cs" />
     <Compile Include="Activity\TodayActivity.cs" />
     <Compile Include="Adapters\ContentItemAdapter.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\General.cs" />
+    <Compile Include="Helper\NotifCollector.cs" />
     <Compile Include="Models\apiModels\ActiveTermId.cs" />
     <Compile Include="Models\apiModels\Announces.cs" />
     <Compile Include="Models\apiModels\Answer.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Models\apiModels\Member.cs" />
     <Compile Include="Models\apiModels\Practices.cs" />
     <Compile Include="Models\apiModels\Resource.cs" />
+    <Compile Include="Models\apiModels\Teacher.cs" />
     <Compile Include="Models\appData.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ViewModels\HomeData.cs" />

@@ -83,6 +83,7 @@ namespace Yara.Activity
             ActiveTerm = 13992;
             data.Home.activeterm = ActiveTerm.ToString();
             Lesson[] Lessons = null;
+
             foreach (var term in TermListRes.data)
                 if (term.Term == ActiveTerm)
                 {
@@ -91,20 +92,44 @@ namespace Yara.Activity
                 }
 
 
+            NotifCollector notif = new NotifCollector();
             int practiceCount = 0;
             int announcesCount = 0;
             int ResourcesCount = 0;
             int examcount = 0;
-
+            int chatCount = 0;
+            const int delay = 5;
             foreach (var l in Lessons)
             {
-                t.Text = (l.LessonTitle + " ...");
-                await Task.Delay(50);
+                notif.LessonName = l.LessonTitle;
+
+                t.Text = (l.LessonTitle + " اعلان ها ...");
+                await Task.Delay(delay);  
                 var AnnouncesRes = await Api.GetAnnounces(l.GroupID);
+
+                t.Text = (l.LessonTitle + " تمارین ...");
+                await Task.Delay(delay);
                 var PracticesRes = await Api.GetPractices(l.GroupID);
+
+                t.Text = (l.LessonTitle + " اطلاعات ...");
+                await Task.Delay(delay);
                 var LessonInfoRes = await Api.GetLessonInfo(l.GroupID);
+
+                t.Text = (l.LessonTitle + " منابع ...");
+                await Task.Delay(delay);
                 var ResourcesRes = await Api.GetResources(l.GroupID);
+
+                t.Text = (l.LessonTitle + " آزمون ها ...");
+                await Task.Delay(delay);
                 var ExamRes = await Api.GetExams(l.GroupID);
+
+                t.Text = (l.LessonTitle + " پیام ها ...");
+                await Task.Delay(delay);
+                var TeachersRes = await Api.GetTeachers(l.GroupID);
+
+
+                t.Text = "در حال پردازش...";
+                await Task.Delay(delay);
 
                 var titel = new NotificationItem
                     (
@@ -114,16 +139,28 @@ namespace Yara.Activity
                         LessonInfoRes.data.EduGroupTitle
                     );
 
-                if (AnnouncesRes.data.Length > 0)
+
+                if (TeachersRes.data != null)
                 {
-                    data.Announces.Add(new ContentItem());
+                    var teacher = TeachersRes.data[0];
+                    data.Teachers.Add(new ContentItem(teacher, LessonInfoRes.data, l));
+                    if (teacher.UnseenMessagesCount > 0)
+                        notif.Add(new ContentItem(teacher, LessonInfoRes.data, l));
+                    chatCount += teacher.UnseenMessagesCount;
+                }
+
+                if (AnnouncesRes.data.Length > 0)
+                {              
                     data.Announces.Add(new ContentItem(titel));
                     foreach (var a in AnnouncesRes.data)
                     {
-                        data.Announces.Add(new ContentItem(a, l.LessonTitle));
+                        ContentItem item = new ContentItem(a, l.LessonTitle);
+                        notif.Add(a);
+                        data.Announces.Add(item);
                         if (a.SeenInfo == null)
                             announcesCount++;
                     }
+                    data.Announces.Add(new ContentItem());
                 }
 
                 if (ExamRes.data.Length > 0)
@@ -132,6 +169,7 @@ namespace Yara.Activity
                     foreach (var a in ExamRes.data)
                     {
                         data.Exams.Add(new ContentItem(a, l.LessonTitle));
+                        notif.Add(a);
                         examcount++;
                     }
                     data.Exams.Add(new ContentItem());
@@ -143,6 +181,7 @@ namespace Yara.Activity
                     foreach (var a in ResourcesRes.data)
                     {
                         data.Resources.Add(new ContentItem(a, l.LessonTitle));
+                        notif.Add(a);
                         ResourcesCount++;
                     }
                     data.Resources.Add(new ContentItem());
@@ -152,6 +191,8 @@ namespace Yara.Activity
                 List<Practices> answered = new List<Practices>();
                 List<Practices> lost = new List<Practices>();
                 foreach (var p in PracticesRes.data)
+                {
+                    notif.Add(p);
                     if (p.RegedAnswer == null)
                     {
                         if (p.InRegAnswerScope)
@@ -164,6 +205,8 @@ namespace Yara.Activity
                     }
                     else
                         answered.Add(p);
+                }
+
 
                 if (insope.Count > 0)
                 {
@@ -173,6 +216,8 @@ namespace Yara.Activity
                     data.practicesList.InScope.Add(new ContentItem());
                 }
 
+
+
                 if (answered.Count > 0)
                 {
                     data.practicesList.Answered.Add(new ContentItem(titel));
@@ -181,6 +226,8 @@ namespace Yara.Activity
                     data.practicesList.Answered.Add(new ContentItem());
                 }
 
+
+
                 if (lost.Count > 0)
                 {
                     data.practicesList.Lost.Add(new ContentItem(titel));
@@ -188,8 +235,24 @@ namespace Yara.Activity
                         data.practicesList.Lost.Add(new ContentItem(i, l.LessonTitle));
                     data.practicesList.Lost.Add(new ContentItem());
                 }
+
+
+
             }
 
+            if (data.practicesList.Lost.Count == 0)
+                data.practicesList.Lost.Add(new ContentItem(new NotificationItem("موردی یافت نشد", "")));
+
+            if (data.practicesList.Answered.Count == 0)
+                data.practicesList.Answered.Add(new ContentItem(new NotificationItem("موردی یافت نشد", "")));
+
+            if (data.practicesList.InScope.Count == 0)
+                data.practicesList.InScope.Add(new ContentItem(new NotificationItem("موردی یافت نشد", "")));
+
+
+            data.Todays = notif.GetList();
+            data.Home.todayText = notif.Count.ToString() + " اعلان فوری ";
+            data.Home.ChatText = chatCount + " پیام ناخوانده ";
             data.Home.practicesText = practiceCount.ToString() + " تمرین آماده پاسخ  ";
             data.Home.announcesText = announcesCount.ToString() + " اعلان جدید  ";
             data.Home.resourcesText = ResourcesCount.ToString() + " منبع ";

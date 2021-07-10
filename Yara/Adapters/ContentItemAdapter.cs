@@ -149,10 +149,24 @@ namespace Yara.Adapters
                     vh.ivImage.Visibility = ViewStates.Visible;
                     vh.ivImage.SetImageResource(Resource.Drawable.ic_exam);
                     break;
+                case Models.ImageType.Profile:
+                    vh.ivImage.Visibility = ViewStates.Visible;
+                    try
+                    {
+                        vh.ivImage.SetImageBitmap(db.LoadProfileImage());
+                    }
+                    catch
+                    {
+                        vh.ivImage.SetImageResource(Resource.Drawable.ic_baseline_person_24);
+                    }
+                    break;
                 default:
                     vh.ivImage.Visibility = ViewStates.Invisible;
                     vh.Item.SetBackgroundColor(Color.Black);
                     break;
+
+
+
             }
 
 

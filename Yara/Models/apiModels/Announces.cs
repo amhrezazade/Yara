@@ -26,17 +26,3 @@ namespace Yara.Models.apiModels
 
     }
 }
-
-/*
-"AnnounceID": 5638,
-"Title": "xcvxcvdv",
-"Description": "",
-"FileName": "",
-"Links": "[]",
-"OrderNo": 5638,
-"IsActive": true,
-"RegDate": "13991022",
-"RegTime": "164208",
-"SeenInfo": "{\"VisitID\":137250,\"VisitDate\":\"13991008\",\"VisitTime\":\"123538\"}"
-*/
-

@@ -29,7 +29,7 @@ namespace Yara.Activity
             var iv = FindViewById<ImageView>(Resource.Id.ivprofileimage);
             try
             {
-                iv.SetImageBitmap(await db.LoadProfileImage());
+                iv.SetImageBitmap(await db.LoadProfileImageAsync());
             }
             catch
             {
@@ -51,7 +51,7 @@ namespace Yara.Activity
             FindViewById<TextView>(Resource.Id.tvresourcescaption).Text = data.resourcesText;
             FindViewById<TextView>(Resource.Id.tvexam).Text = data.examText;
             FindViewById<TextView>(Resource.Id.tvtoday).Text = data.todayText;
-            
+            FindViewById<TextView>(Resource.Id.tvteacher).Text = data.ChatText;
         }
         
         private void setClickvent()
@@ -76,6 +76,10 @@ namespace Yara.Activity
             {
                 StartActivity(new Intent(Application.Context, typeof(TodayActivity)));
             };
+            FindViewById<Button>(Resource.Id.btshowteacher).Click += (s, e) =>
+            {
+                StartActivity(new Intent(Application.Context, typeof(TeacherActivity)));
+            };
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -91,14 +95,14 @@ namespace Yara.Activity
 
         protected override void OnResume()
         {
+            base.OnResume();
+
             FindViewById<TextView>(Resource.Id.tvTitel).Text =
                 DateTimeHelper.GetDateStringEx() +
                 "\r\n" +
                 " اخرین به روز رسانی : " +
                 DateTimeHelper.GetDateString(LastUpdate);
 
-             
-            base.OnResume();
         }
 
     }
