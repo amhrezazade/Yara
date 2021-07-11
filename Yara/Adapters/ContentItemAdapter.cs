@@ -54,9 +54,15 @@ namespace Yara.Adapters
     public class ContentItemAdapter : RecyclerView.Adapter
     {
         ContentItem[] Items;
-
-        public ContentItemAdapter(ContentItem[] List)
+        Context co;
+        public ContentItemAdapter(ContentItem[] List, Context ac = null)
         {
+            if (ac == null)
+                co = Application.Context;
+            else
+                co = ac;
+
+
             Items = List;
         }
 
@@ -126,11 +132,11 @@ namespace Yara.Adapters
                 case Models.ImageType.Motif:
                     vh.ivImage.Visibility = ViewStates.Visible;
                     vh.ivImage.SetImageResource(Resource.Drawable.ic_notif);
-                    if(item.RedNote == "جدید")
+                    if(item.GreenNote == "جدید")
                     {
                         Task.Run(() =>
                         {
-                            Api.SeenAnnounce(int.Parse(item.Def));
+                            Api.SeenAnnounce(int.Parse(item.RedNote));
                         });
                         vh.Item.SetBackgroundColor(Color.Rgb(60,0,80));
                     }
@@ -147,7 +153,6 @@ namespace Yara.Adapters
                     vh.ivImage.Visibility = ViewStates.Visible;
                     vh.Item.Click += async (s, e) =>
                     {
-                        var co = Application.Context;
                         var intent = new Intent(co, typeof(MessageActivity));
                         intent.PutExtra("arg", item.Def);
                         co.StartActivity(intent);

@@ -70,16 +70,17 @@ namespace Yara.Models.ViewModels
             date = DateTimeHelper.GetDateString(a.RegDate,a.RegTime);
             if (a.SeenInfo == null)
             {
-                GreenNote = string.Empty;
-                RedNote = "جدید";
+                GreenNote = "جدید";
+                
             }
             else 
             {
-                GreenNote = "دیده شده در ";
                 var inf = JsonConvert.DeserializeObject<SeenInformation>(a.SeenInfo);
-                RedNote = DateTimeHelper.GetDateString(inf.VisitDate, inf.VisitTime);
+                GreenNote = "دیده شده در " + "\r\n" + DateTimeHelper.GetDateString(inf.VisitDate, inf.VisitTime);
             }
-            Def = LessonName + " (" + a.AnnounceID.ToString() + ")";
+
+            RedNote = a.AnnounceID.ToString();
+            Def = LessonName;
             if (a.FileName == string.Empty)
                 Link = "";
             else
@@ -229,7 +230,7 @@ namespace Yara.Models.ViewModels
             if (t.FileName == string.Empty)
                 Link = "";
             else
-                Link = StaticData.DownloadresourcesURL +
+                Link = StaticData.DownloadticketURL +
                     t.FileName +
                     "?token=" +
                     General.GenerateToken(t.FileName);

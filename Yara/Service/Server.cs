@@ -93,7 +93,14 @@ namespace Yara.Service
                         code = (int)response.StatusCode
                     };
                 var sr = new StreamReader(response.GetResponseStream());
-                var res = await sr.ReadToEndAsync();
+                string res;
+                try {
+                    res = await sr.ReadToEndAsync();
+                } catch 
+                {
+                    res = "رمز اشتباه";
+                }
+                 
                 return new ApiResult()
                 {
                     ok = false,

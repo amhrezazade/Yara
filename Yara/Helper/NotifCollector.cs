@@ -122,7 +122,7 @@ namespace Yara.Helper
         }
 
         public void Add(Practices e)
-        {
+         {
             ContentItem item = new ContentItem(e, LessonName);
             switch (DateTimeHelper.GetDayType(e.RegDate))
             {

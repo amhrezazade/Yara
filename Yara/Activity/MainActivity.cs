@@ -51,8 +51,13 @@ namespace Yara.Activity
             FindViewById<TextView>(Resource.Id.tvexam).Text = data.examText;
             FindViewById<TextView>(Resource.Id.tvtoday).Text = data.todayText;
             FindViewById<TextView>(Resource.Id.tvteacher).Text = data.ChatText;
-            FindViewById<TextView>(Resource.Id.tvactiveterm).Text = data.activeterm;
 
+            var t = FindViewById<TextView>(Resource.Id.tvactiveterm);
+            t.Text = data.activeterm;
+            t.Click += (s, e) =>
+            {
+                StartActivity(new Intent(Application.Context, typeof(SelectTermActivity)));
+            };
 
             FindViewById<Button>(Resource.Id.btshowpractice).Click += (s, e) =>
             {
@@ -78,6 +83,28 @@ namespace Yara.Activity
             {
                 StartActivity(new Intent(Application.Context, typeof(TeacherActivity)));
             };
+            FindViewById<TextView>(Resource.Id.tvabout).Click += (s, e) =>
+            {
+                StartActivity(new Intent(Application.Context, typeof(AboutActivity)));
+            };
+
+            FindViewById<Button>(Resource.Id.btexit).Click += (s, e) =>
+            {
+                if (db.clearData())
+                {
+                    StartActivity(new Intent(Application.Context, typeof(splash)));
+                    Finish();
+                }
+
+            };
+
+            FindViewById<Button>(Resource.Id.btupdate).Click += (s, e) =>
+            {
+                StartActivity(new Intent(Application.Context, typeof(splash)));
+                Finish();
+            };
+
+            
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -95,8 +122,6 @@ namespace Yara.Activity
             base.OnResume();
 
             FindViewById<TextView>(Resource.Id.tvTitel).Text =
-                DateTimeHelper.GetDateStringEx() +
-                "\r\n" +
                 " اخرین به روز رسانی : " +
                 DateTimeHelper.GetDateString(LastUpdate);
 

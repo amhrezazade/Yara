@@ -146,16 +146,19 @@ namespace Yara.Service
             }
         }
 
-        public static void clearData()
+        public static bool clearData()
         {
             try
             {
                 File.Delete(localFileName);
                 File.Delete(localFileName + "a");
                 File.Delete(localFileName + ".jpg");
+                return true;
             }
             catch
-            { }
+            {
+                return false;
+            }
         }
 
     }

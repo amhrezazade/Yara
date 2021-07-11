@@ -258,6 +258,12 @@ namespace Yara.Helper
 
         public static string GetDateString(string date, string time)
         {
+            if (time == null || time == "")
+                time = "0000";
+
+            if (time == null || time == "")
+                time = "14000101";
+
             //string output = " ⏰ " +  new Date(date).ToString('/') + " ( " + DateEx(date,time) + " )\r\n 📆 " + new Time(time).ToString(':', true);
             string output = " 📆 " + new Date(date).ToString('/') + " ( " + DateEx(date,time) + " )  ⏰  " + new Time(time).ToString(':', true);
             return CommonExtensions.ToPersianNumber(output);

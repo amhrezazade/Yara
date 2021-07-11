@@ -65,12 +65,27 @@ namespace Yara.Activity
                     return;
             }
 
-            var data = new appData();
+            int ActiveTerm;
+            appData data = db.Load();
+
+            try 
+            {
+                ActiveTerm = int.Parse(data.Home.activeterm);
+                data = new appData();
+            } 
+            catch 
+            {
+                data = new appData();
+                var ActiveTermRes = await Api.GetActiveTermId();
+                ActiveTerm = ActiveTermRes.data.ActiveTerm;
+            }
+
+
+            data.Home.activeterm = ActiveTerm.ToString();
 
 
             var studentResult = await Api.GetStudetData();
             var TermListRes = await Api.GetTermList();
-            var ActiveTermRes = await Api.GetActiveTermId();
 
             var imagebytes = await Server.GetProfileImageBytes(studentResult.data.ImageFileName);
             if (imagebytes != null)
@@ -79,9 +94,8 @@ namespace Yara.Activity
             data.Home.Name = studentResult.data.FirstName + " " + studentResult.data.LastName;
             data.Home.StudentCode = studentResult.data.StudentCode;
             data.Home.StudentId = studentResult.data.StudentID.ToString();
-            int ActiveTerm = ActiveTermRes.data.ActiveTerm;
-            ActiveTerm = 13992;
-            data.Home.activeterm = ActiveTerm.ToString();
+            
+
             Lesson[] Lessons = null;
 
             List<string> TermsList = new List<string>();

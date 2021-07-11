@@ -64,12 +64,14 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity\AboutActivity.cs" />
     <Compile Include="Activity\AnnouncesActivity.cs" />
     <Compile Include="Activity\ExamActivity.cs" />
     <Compile Include="Activity\LoginActivity.cs" />
     <Compile Include="Activity\MessageActivity.cs" />
     <Compile Include="Activity\PracticesActivity.cs" />
     <Compile Include="Activity\ResourceActivity.cs" />
+    <Compile Include="Activity\SelectTermActivity.cs" />
     <Compile Include="Activity\splash.cs" />
     <Compile Include="Activity\TeacherActivity.cs" />
     <Compile Include="Activity\TodayActivity.cs" />
@@ -311,6 +313,19 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_mail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SelectTerm.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\About.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\about.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
